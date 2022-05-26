@@ -1,0 +1,369 @@
+.umang-landing-page {
+	.banner {
+		position: relative;
+		width: 100%;
+		height: 100vh;
+		video.umang-bg-video {
+			object-fit: cover;
+			height: 100%;
+		}
+		.banner-overlay {
+			text-align: center;
+			width: 100%;
+			height: 100%;
+			background: rgba(221,51,51,.5);
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			color: #fff;
+			text-transform: uppercase;
+			background: linear-gradient(to right top,transparent 33%,rgba(100,51,51,.9) 0,rgba(100,30,30,.9) 66%,transparent 0),rgba(221,51,51,.5);
+			background-size: 3px 3px;
+			.title {
+				font-weight: 700;
+				font-size: 72px;
+				color: #fff;
+				line-height: 140%;
+			}
+			.line-1 {
+				font-size: 21px;
+				letter-spacing: 1px;
+				font-weight: 700;
+				line-height: 140%;
+				margin-bottom: 20px;
+			}
+			.line-2 {
+				margin-bottom: 20px;
+				line-height: 160%;
+				padding: 20px;
+			}
+		}
+	}
+	.about-container {
+		color: #fff;
+		background-color: #1d2152;
+		display: block;
+		.about-1 {
+			flex: 1 1;
+			padding: 40px;
+			box-sizing: border-box;
+			.title {
+				font-weight: 700;
+				line-height: 160%;
+				font-size: 36px;
+			}
+			.desc {
+				line-height: 160%;
+				p {
+					&:after {
+						content: "";
+						display: block;
+						height: 12px;
+					}
+				}
+			}
+		}
+		.about-2 {
+			flex: 1 1;
+			padding: 40px;
+			box-sizing: border-box;
+			.details {
+				display: flex;
+				flex-direction: column;
+				align-items: start;
+				line-height: 160%;
+				.heading {
+					font-size: 16px;
+					font-weight: 700;
+				}
+				.detail {
+					font-size: 16px;
+					margin-bottom: 20px;
+					a {
+						color: inherit;
+					}
+				}
+			}
+			.poster {
+				padding-top: 0;
+				padding-bottom: 0;
+				img {
+					width: 150px;
+				}
+			}
+		}
+	}
+	.event-container {
+		.title {
+			color: #1d2152;
+			text-align: center;
+			font-size: 48px;
+			font-weight: 700;
+			margin: 40px 0;
+		}
+		.event-cards {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			.card {
+				flex-basis: 40%;
+				position: relative;
+				height: 350px;
+				margin: 40px;
+				color: #fff;
+				.detail {
+					position: absolute;
+					bottom: 0;
+					padding: 20px;
+					box-sizing: border-box;
+					line-height: 160%;
+					.heading {
+						font-size: 36px;
+						font-weight: 700;
+						text-align: left;
+					}
+					.desc-1 {
+						font-weight: 700;
+						font-size: 120%;
+					}
+				}
+			}
+		}
+	}
+	.fest-details {
+		display: flex;
+		background-color: #1d2152;
+		.part {
+			flex-basis: 50%;
+			color: #fff;
+			text-align: center;
+			padding: 80px;
+			box-sizing: border-box;
+			.title {
+				font-size: 48px;
+				line-height: 160%;
+				font-weight: 700;
+			}
+			.up-title {
+				font-weight: 600;
+				margin-bottom: 20px;
+				color: #ff0;
+			}
+			img {
+				width: 100%;
+			}
+			.para {
+				line-height: 160%;
+			}
+		}
+		.part.poster {
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+	}
+	.action-container {
+		background-color: #f4f4f4;
+		padding: 40px;
+		box-sizing: border-box;
+		display: flex;
+		justify-content: space-around;
+		.plate-1 {
+			flex-basis: 50%;
+			line-height: 160%;
+			margin-bottom: 40px;
+			.title {
+				font-weight: 700;
+				font-size: 42px;
+				line-height: 160%;
+			}
+			.grey {
+				color: #444;
+			}
+			.red {
+				color: #d12326;
+			}
+		}
+		.plate-2 {
+			flex-basis: 30%;
+			background-color: #fff;
+			border-radius: 6px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 30px 0 0;
+			box-sizing: border-box;
+			.heading {
+				font-size: 16px;
+				font-weight: 700;
+			}
+			.price {
+				font-weight: 700;
+				font-size: 48px;
+				color: #d12326;
+				margin: 20px 0;
+			}
+			ul.features {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				li {
+					&:before {
+						content: "✔️  ";
+					}
+					margin: 10px 0;
+				}
+			}
+			.purchase {
+				width: 100%;
+				margin-top: 20px;
+				button {
+					width: 100%;
+					border: 0;
+					background-color: #1d2152;
+					color: #fff;
+					font-weight: 700;
+					text-align: center;
+					padding: 16px;
+				}
+			}
+		}
+	}
+	.register-btn {
+		font-weight: 700;
+	}
+}
+
+@media (min-width:1280px) {
+	.umang-landing-page {
+		.about-container {
+			display: flex;
+			.about-2 {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+			}
+		}
+	}
+}
+@media (max-width:1280px) and (min-width:768px) {
+	.umang-landing-page {
+		.about-container {
+			display: flex;
+			.about-2 {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+			}
+		}
+		.fest-details {
+			.part {
+				padding: 50px;
+			}
+		}
+	}
+	.umang-container {
+		div.form {
+			width: 70%;
+		}
+	}
+	.heading {
+		font-size: 56px;
+	}
+	.action-footer {
+		padding: 70px 55px;
+		.message {
+			width: 60%;
+		}
+		.subscribe-form {
+			flex: 1 1;
+			input {
+				width: 100%;
+			}
+		}
+	}
+}
+@media (max-width:768px) {
+	.umang-landing-page {
+		.about-container {
+			.about-2 {
+				.poster {
+					img {
+						width: 100%;
+					}
+				}
+			}
+		}
+		.event-container {
+			.event-cards {
+				display: block;
+			}
+		}
+		.fest-details {
+			display: block;
+			.part {
+				padding: 30px;
+			}
+			.part.poster {
+				padding-top: 0;
+			}
+		}
+		.action-container {
+			display: block;
+		}
+	}
+	.umang-container {
+		div.form {
+			width: 100%;
+		}
+	}
+	.footer-container {
+		flex-direction: column;
+		align-items: center;
+		iframe {
+			width: 100%;
+		}
+		.content {
+			width: 100%;
+			margin-top: 20px;
+			.link-container {
+				justify-content: space-around;
+				margin-bottom: 20px;
+			}
+		}
+	}
+	.heading {
+		font-size: 42px;
+	}
+	.btn {
+		font-size: 14px;
+	}
+	.btn-group {
+		display: flex;
+		flex-direction: column;
+		.btn {
+			&:first-child {
+				margin: 0 0 12px;
+			}
+		}
+	}
+	.action-footer {
+		flex-direction: column;
+		padding: 60px 30px;
+		.message {
+			width: 100%;
+			margin-bottom: 30px;
+		}
+		.subscribe-form {
+			width: 100%;
+			input {
+				width: 100%;
+			}
+		}
+	}
+}
