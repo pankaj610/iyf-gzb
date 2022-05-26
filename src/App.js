@@ -6,7 +6,6 @@ import AboutContainer from "./containers/AboutContainer";
 import TncContainer from "./containers/TncContainer";
 import PrivacyContainer from "./containers/PrivacyContainer";
 import RefundContainer from "./containers/RefundContainer";
-import { ROUTES } from "./router";
 
 function App() {
   return (
