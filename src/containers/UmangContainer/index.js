@@ -1,234 +1,242 @@
-import React from 'react';
+import React from "react";
+import FooterComponent from "../../components/Footer";
 import "./style.scss";
 
 const UmangContainer = () => {
-    return (
-        <div>
-        <div className="umang-landing-page">
+  return (
+    <div>
+      <div className="umang-landing-page">
         <div className="banner">
-        <video className="umang-bg-video" playsInline muted loop autoPlay width="100%">
+          {/* <video className="umang-bg-video" playsInline muted loop autoPlay width="100%">
         <source src="https://res.cloudinary.com/dnuq1lgqs/video/upload/v1610357653/Umang_y3rb3k.mp4" type="video/mp4"/>
         Your browser does not support HTML5 video.
-        </video>
-        <div className="banner-overlay">
-            <div className="title">
-        GITA UTSAV 2022
-        </div>
-        <div className="line-1">Festival of Wisdom and Joy</div>
-        <div className="line-2">26 MARCH 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS</div>
-        <a href="https://cutt.ly/registerNow" target="_blank" rel="noreferrer">
-        
-        <button className="register-btn round-btn" 
-        style={{backgroundcolor: "transparent", color: "rgb(255, 255, 255)", border: "2px solid rgb(255, 255, 255)"}}>REGISTER NOW
-        </button>
-        </a>
-        </div>
+        </video> */}
+          <div className="banner-overlay">
+            <div className="title">UMANG 2022</div>
+            <div className="line-1">Ray of Hope...</div>
+            <div className="line-2">
+              26 MARCH 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
+            </div>
+            <a
+              href="https://cutt.ly/registerNow"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button
+                className="register-btn round-btn"
+                style={{
+                  backgroundcolor: "transparent",
+                  color: "rgb(255, 255, 255)",
+                  border: "2px solid rgb(255, 255, 255)",
+                }}
+              >
+                REGISTER NOW
+              </button>
+            </a>
+          </div>
         </div>
         <div className="about-container">
-        <div className="about-1">
-        <div className="title">About the Fest
-        </div>
-        <div className="desc">
-        <p>Gita Utsav is the thematic annual youth fest of IYF Ghaziabad and is expected to be participated by 500+ youths. The festival would project Rock music band,  Quiz with exciting prizes, Motivational talks by leading personalities, Panel Discussion on current issues and full Dinner Buffet for all the participants. It will be attended by several institute directors, faculties. artists, and scholars from all across Delhi/NCR.
-        </p>
-        </div>
-        </div>
-        <div className="about-2">
-        <div className="details">
-        <div className="heading">THEME
-        </div>
-        <div className="detail">5 Life Changing Lessons from Bhagavad Gita
-        </div>
-        <div className="heading">WHERE
-        </div>
-        <div className="detail">
-        <a href="https://goo.gl/maps/VRvoocp5mfuYDFKD8" target="_blank" rel="noreferrer">ISKCON GHAZIABAD
-        </a>
-        </div>
-        <div className="heading">WHEN
-        </div>
-        <div className="detail">26 March 2022
-        </div>
-        </div>
-        <div className="poster">
-        <img src="https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644658407/Gita_Utsav_Poster_yntoyh.jpg" />
-        </div>
-        </div>
+          <div className="about-1">
+            <div className="title">About the Fest</div>
+            <div className="desc">
+              <p>
+                UMANG is the thematic annual youth fest of IYF Ghaziabad
+                and is expected to be participated by 500+ youths. The festival
+                would project Rock music band, Quiz with exciting prizes,
+                Motivational talks by leading personalities, Panel Discussion on
+                current issues and full Dinner Buffet for all the participants.
+                It will be attended by several institute directors, faculties.
+                artists, and scholars from all across Delhi/NCR.
+              </p>
+            </div>
+          </div>
+          <div className="about-2">
+            <div className="details">
+              <div className="heading">THEME</div>
+              <div className="detail">
+                5 Life Changing Lessons from Bhagavad Gita
+              </div>
+              <div className="heading">WHERE</div>
+              <div className="detail">
+                <a
+                  href="https://goo.gl/maps/VRvoocp5mfuYDFKD8"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  ISKCON GHAZIABAD
+                </a>
+              </div>
+              <div className="heading">WHEN</div>
+              <div className="detail">26 March 2022</div>
+            </div>
+            <div className="poster">
+              <img src="https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644658407/Gita_Utsav_Poster_yntoyh.jpg" />
+            </div>
+          </div>
         </div>
         <div className="event-container">
-        <div className="title">Events.
-        </div>
-        <div className="event-cards">
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://iyfdelhi.com/wp-content/uploads/2013/06/shutterstock_314450846.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Enlightening Talk
-        </div>
-        <div className="desc-1">HG Ashraya Krishna Das
-        </div>
-        <div className="desc-2">Founder, Siksharthakam Educator Community
-        </div>
-        <div className="desc-2">M. Tech. IIT Kharagpur
-        </div>
-        </div>
-        </div>
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://static.toiimg.com/photo/msid-76158920/76158920.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Theatrical Performance
-        </div>
-        <div className="desc-2">which broadcasts a strong relevant message.
-        </div>
-        </div>
-        </div>
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1610437180/headway-5QgIuuBxKwM-unsplash_1_dl1n31.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Panel Discussion
-        </div>
-        <div className="desc-2">Seedhi Baat ISKCON ke Saath
-        </div>
-        </div>
-        </div>
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644671842/Event-Organisers-For-Game-Show_tgzcqy.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Vedic Quiz
-        </div>
-        <div className="desc-2">Participate in Vedic Quiz &amp; Win Exciting Prizes
-        </div>
-        </div>
-        </div>
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644671180/pexels-wesley-carvalho-3622614_wezym7.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Talent Hunt
-        </div>
-        <div className="desc-2">Showcase your Talent &amp; Win Exciting Prizes
-        </div>
-        </div>
-        </div>
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://cdn.statically.io/img/www.kworldnow.com/f=auto/wp-content/uploads/2020/07/man-playing-guitar-811838.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Mantra Rock Dance
-        </div>
-        <div className="desc-2">Get your heads a little higher!
-        </div>
-        </div>
-        </div>
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://www.daysoftheyear.com/wp-content/uploads/national-fast-food-day.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Dinner Buffet
-        </div>
-        <div className="desc-2">We bet, you'll never forget the taste!
-        </div>
-        </div>
-        </div>
-        <div className="card" 
-        style={{background: "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://iyfdelhi.com/wp-content/uploads/2013/06/shutterstock_612941954.jpg') center center / cover no-repeat"}}>
-        <div className="detail">
-        <div className="heading">Lots of Fun
-        </div>
-        <div className="desc-2">Music! Dance! FOOD!!
-        </div>
-        </div>
-        </div>
-        </div>
+          <div className="title">Events.</div>
+          <div className="event-cards">
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://iyfdelhi.com/wp-content/uploads/2013/06/shutterstock_314450846.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Enlightening Talk</div>
+                <div className="desc-1">HG Ashraya Krishna Das</div>
+                <div className="desc-2">
+                  Founder, Siksharthakam Educator Community
+                </div>
+                <div className="desc-2">M. Tech. IIT Kharagpur</div>
+              </div>
+            </div>
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://static.toiimg.com/photo/msid-76158920/76158920.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Theatrical Performance</div>
+                <div className="desc-2">
+                  which broadcasts a strong relevant message.
+                </div>
+              </div>
+            </div>
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1610437180/headway-5QgIuuBxKwM-unsplash_1_dl1n31.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Panel Discussion</div>
+                <div className="desc-2">Seedhi Baat ISKCON ke Saath</div>
+              </div>
+            </div>
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644671842/Event-Organisers-For-Game-Show_tgzcqy.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Vedic Quiz</div>
+                <div className="desc-2">
+                  Participate in Vedic Quiz &amp; Win Exciting Prizes
+                </div>
+              </div>
+            </div>
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644671180/pexels-wesley-carvalho-3622614_wezym7.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Talent Hunt</div>
+                <div className="desc-2">
+                  Showcase your Talent &amp; Win Exciting Prizes
+                </div>
+              </div>
+            </div>
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://cdn.statically.io/img/www.kworldnow.com/f=auto/wp-content/uploads/2020/07/man-playing-guitar-811838.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Mantra Rock Dance</div>
+                <div className="desc-2">Get your heads a little higher!</div>
+              </div>
+            </div>
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://www.daysoftheyear.com/wp-content/uploads/national-fast-food-day.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Dinner Buffet</div>
+                <div className="desc-2">
+                  We bet, you'll never forget the taste!
+                </div>
+              </div>
+            </div>
+            <div
+              className="card"
+              style={{
+                background:
+                  "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://iyfdelhi.com/wp-content/uploads/2013/06/shutterstock_612941954.jpg') center center / cover no-repeat",
+              }}
+            >
+              <div className="detail">
+                <div className="heading">Lots of Fun</div>
+                <div className="desc-2">Music! Dance! FOOD!!</div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="fest-details">
-        <div className="part">
-        <div className="up-title">THEME
-        </div>
-        <div className="title">5 Life Lessons from Bhagavad Gita
-        </div>
-        <p className="para">Once titled Golden Bird, Vishwa Guru, India has now come way ahead only to realize that the paradise is lost. The countless glories that embellished Indian historical era are now a part of textbooks only. Let us become instrumental in excavating and reviving the lost grandeur of our ancient tradition. Let us discover, understand, preserve and promote the glories of Vedic Culture.
-        </p>
-        </div>
-        <div className="part poster">
-        <img src="https://res.cloudinary.com/dnuq1lgqs/image/upload/v1626932442/Daily_Nuggets_14_pkwgau.jpg" />
-        </div>
+          <div className="part">
+            <div className="up-title">THEME</div>
+            <div className="title">5 Life Lessons from Bhagavad Gita</div>
+            <p className="para">
+              Once titled Golden Bird, Vishwa Guru, India has now come way ahead
+              only to realize that the paradise is lost. The countless glories
+              that embellished Indian historical era are now a part of textbooks
+              only. Let us become instrumental in excavating and reviving the
+              lost grandeur of our ancient tradition. Let us discover,
+              understand, preserve and promote the glories of Vedic Culture.
+            </p>
+          </div>
+          <div className="part poster">
+            <img src="https://res.cloudinary.com/dnuq1lgqs/image/upload/v1626932442/Daily_Nuggets_14_pkwgau.jpg" />
+          </div>
         </div>
         <div className="action-container">
-        <div className="plate-1">
-        <div className="title">Grab your ticket now!
+          <div className="plate-1">
+            <div className="title">Grab your ticket now!</div>
+            <p className="grey">
+              Dont miss this great opportunity else you miss yourself.
+            </p>
+            <p className="red">Hurry up! Limited Seats!</p>
+          </div>
+          <div className="plate-2">
+            <div className="heading">Full Access</div>
+            <div className="price">₹100/-</div>
+            <ul className="features">
+              <li>Seminar</li>
+              <li>Debate</li>
+              <li>Vedic Quiz</li>
+              <li>Mantra Rock Show</li>
+              <li>Theatre</li>
+              <li>Dinner Buffet</li>
+            </ul>
+            <a
+              href="https://cutt.ly/registerNow"
+              target="_blank"
+              rel="noreferrer"
+              className="purchase"
+            >
+              <button>Purchase Ticket</button>
+            </a>
+          </div>
         </div>
-        <p className="grey">Dont miss this great opportunity else you miss yourself.
-        </p>
-        <p className="red">Hurry up! Limited Seats!
-        </p>
-        </div>
-        <div className="plate-2">
-        <div className="heading">Full Access
-        </div>
-        <div className="price">₹100/-
-        </div>
-        <ul className="features">
-        <li>Seminar
-        </li>
-        <li>Debate
-        </li>
-        <li>Vedic Quiz
-        </li>
-        <li>Mantra Rock Show
-        </li>
-        <li>Theatre
-        </li>
-        <li>Dinner Buffet
-        </li>
-        </ul>
-        <a href="https://cutt.ly/registerNow" target="_blank" rel="noreferrer" className="purchase">
-        <button>Purchase Ticket
-        </button>
-        </a>
-        </div>
-        </div>
-        </div>
-        <div className="footer-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d347.6031851377908!2d77.45069463463751!3d28.682340188566755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf199a672e86f%3A0x93b6a8443203ee20!2sISKCON%20Temple%2C%20Ghaziabad!5e0!3m2!1sen!2sin!4v1607361543505!5m2!1sen!2sin" 
-        width="400" height="300" frameBorder="0" allowFullScreen="" aria-hidden="false" tabIndex="0" 
-        title='Our location'
-        style={{border: "0px"}}>
-        </iframe>
-        <div className="content">
-        <div className="link-container">
-        <div className="links">
-        
-        <a href="https://t.me/IYFGhaziabad" target="_blank" rel="noreferrer">
-            Connect to Krishna
-        </a>
-        <a href="https://www.facebook.com/media/set/?vanity=IYFGhaziabad&amp;set=a.128262368703002" target="_blank" rel="noreferrer">Mega Youth Fest 2020
-        </a>
-        <a href="https://udgaar.in/" target="_blank" rel="noreferrer">UDGAAR Fest 2019
-        </a>
-        <a href="/about" target="_blank" rel="noreferrer">About Us
-        </a>
-        <a href="/contact-us" target="_blank" rel="noreferrer">Contact Us
-        </a>
-        <a href="/privacy" target="_blank" rel="noreferrer">Privacy Policy
-        </a>
-        <a href="/tnc" target="_blank" rel="noreferrer">Terms &amp; Conditions
-        </a><a href="/refund" target="_blank" rel="noreferrer">Refund Policy
-        </a>
-        </div>
-        <div className="links">
-            <a href="https://www.facebook.com/IYFGhaziabad" target="_blank" rel="noreferrer">Facebook
-        </a>
-        <a href="https://t.me/IYFGhaziabad" target="_blank" rel="noreferrer">Telegram
-        </a>
-        <a href="https://chat.whatsapp.com/JTvafXN6Xto9cgFXdFGkzz" target="_blank" rel="noreferrer">Whatsapp
-        </a>
-        <a href="mailto:connecttokrishnanow@gmail.com" target="_blank" rel="noreferrer">Email
-        </a>
-        </div>
-        </div>
-        <div className="copyright">© ISKCON YOUTH FORUM GHAZIABAD 2022
-        </div>
-        </div>
-        </div>
-        </div>
-    )
-}
+      </div>
+      <FooterComponent />
+    </div>
+  );
+};
 
 export default UmangContainer;

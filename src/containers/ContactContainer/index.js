@@ -1,10 +1,14 @@
-import React from 'react';
+import React from "react";
+import Layout from "../../components/Layout";
 
 const ContactContainer = () => (
-<div>
-Contact us
-For any assistance or grievances, please reach us at connecttokrishnanow@gmail.com
-You may also reach out to our location at IYF Ghaziabad Seminar Hall, R-11/35 Raj Nagar, Ghaziabad  201002 (India)
-</div>)
+  <Layout title="Contact Us">
+    <div>
+      For any assistance or grievances, please reach us at
+      connecttokrishnanow@gmail.com You may also reach out to our location at
+      Seminar Hall, ISKCON Ghaziabad, R-11/35 Raj Nagar, Ghaziabad 201002 (India)
+    </div>
+  </Layout>
+);
 
 export default ContactContainer;

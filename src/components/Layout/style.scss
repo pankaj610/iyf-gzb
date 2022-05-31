@@ -1,0 +1,22 @@
+.layout-container {
+    .header {
+        padding: 40px 100px;
+        background-color:#319795;
+        color: white;
+        font-weight: 500;
+        font-size: 32px;
+    }
+    .body {
+        padding: 50px 100px;
+        text-align: justify;
+        font-family: "Quicksand";
+        p:after {
+            content: "";
+            margin-bottom: 1rem;
+            display: block;
+        }
+    }
+    .bold {
+        font-weight: 600;
+    }
+}
