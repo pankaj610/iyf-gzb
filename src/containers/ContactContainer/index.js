@@ -11,7 +11,7 @@ const ContactContainer = () => (
         (India)
       </p>
       <p>
-        If you still feel your issues unaddressed, you can call/whatsapp Ravi at (+91)9953522058.
+        If you still feel your issues unaddressed, you can call/whatsapp Ravi or Khagender Sharma at (+91)9953522058.
       </p>
     </div>
   </Layout>
