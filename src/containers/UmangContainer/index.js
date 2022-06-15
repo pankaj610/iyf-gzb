@@ -7,15 +7,15 @@ const UmangContainer = () => {
     <div>
       <div className="umang-landing-page">
         <div className="banner">
-          {/* <video className="umang-bg-video" playsInline muted loop autoPlay width="100%">
+           <video className="umang-bg-video" playsInline muted loop autoPlay width="100%">
         <source src="https://res.cloudinary.com/dnuq1lgqs/video/upload/v1610357653/Umang_y3rb3k.mp4" type="video/mp4"/>
         Your browser does not support HTML5 video.
-        </video> */}
+        </video>
           <div className="banner-overlay">
-            <div className="title">UMANG 2022</div>
+            <div className="title">UTSAH 2022</div>
             <div className="line-1">Ray of Hope...</div>
             <div className="line-2">
-              26 MARCH 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
+              15 August  2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
             </div>
             <a
               href="https://cutt.ly/registerNow"
@@ -40,7 +40,7 @@ const UmangContainer = () => {
             <div className="title">About the Fest</div>
             <div className="desc">
               <p>
-                UMANG is the thematic annual youth fest of IYF Ghaziabad
+                UTSAH is the thematic annual youth fest of IYF Ghaziabad
                 and is expected to be participated by 500+ youths. The festival
                 would project Rock music band, Quiz with exciting prizes,
                 Motivational talks by leading personalities, Panel Discussion on
@@ -67,10 +67,10 @@ const UmangContainer = () => {
                 </a>
               </div>
               <div className="heading">WHEN</div>
-              <div className="detail">26 March 2022</div>
+              <div className="detail"> 15 August 2022</div>
             </div>
             <div className="poster">
-              <img src="https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644658407/Gita_Utsav_Poster_yntoyh.jpg" />
+              <img src="https://res.cloudinary.com/xyzttt/image/upload/v1654711498/WhatsApp_Image_2022-06-08_at_11.33.20_PM_yihv4f.jpg" />
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ const UmangContainer = () => {
             >
               <div className="detail">
                 <div className="heading">Enlightening Talk</div>
-                <div className="desc-1">HG Ashraya Krishna Das</div>
+                <div className="desc-1">HG Ram bhadra Das</div>
                 <div className="desc-2">
                   Founder, Siksharthakam Educator Community
                 </div>
