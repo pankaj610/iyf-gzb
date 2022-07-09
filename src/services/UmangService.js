@@ -10,10 +10,10 @@ import {
 // const BASE_URL = 'https://iyfapi.herokuapp.com';
 // const BASE_URL = "http://localhost:59635";
 // const BASE_URL = "https://arcane-fjord-22981.herokuapp.com";
-const BASE_URL = "http://172.105.61.169:8000";
+const BASE_URL = "https://iyfghaziabad.com/api/devotee";
 
 export const createNewRegistration = (userDetails) => {
-  return axios.post(BASE_URL + "/users", userDetails);
+  return axios.post(BASE_URL + "/create", userDetails);
 };
 
 export const updateRegistration = (userDetails) => {
@@ -25,7 +25,7 @@ export const fetchVolunteerList = () => {
 };
 
 export const fetchAllRegistrations = () => {
-  return axios.get(BASE_URL + "/devotee/list");
+  return axios.get(BASE_URL + "/list");
 };
 
 export const markAttendance = (id, isPresent) => {
