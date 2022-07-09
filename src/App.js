@@ -8,19 +8,8 @@ import PrivacyContainer from "./containers/PrivacyContainer";
 import RefundContainer from "./containers/RefundContainer";
 import UmangVolunteerContainer from "./containers/UmangVolunteerContainer";
 import UmangRegListContainer from "./containers/UmangRegListContainer";
-import { useEffect } from "react";
-import axios from "axios";
 
 function App() {
-  useEffect(() => {
-    // fetch("http://172.105.61.169:8000").then((data) => {
-    // fetch("http://localhost:8000").then((data) => {
-    //   console.log("data", data.json())
-    // }).catch((error) => console.log(error))
-    axios.get("http://172.105.61.169:8000").then((response) => {
-      console.log("data", response.data)
-    }).catch((error) => console.log(error))
-  }, [])
   return (
     <div className="App">
       <Router>
