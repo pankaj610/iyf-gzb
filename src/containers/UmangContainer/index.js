@@ -7,15 +7,25 @@ const UmangContainer = () => {
     <div>
       <div className="umang-landing-page">
         <div className="banner">
-           <video className="umang-bg-video" playsInline muted loop autoPlay width="100%">
-        <source src="https://res.cloudinary.com/dnuq1lgqs/video/upload/v1610357653/Umang_y3rb3k.mp4" type="video/mp4"/>
-        Your browser does not support HTML5 video.
-        </video>
+          <video
+            className="umang-bg-video"
+            playsInline
+            muted
+            loop
+            autoPlay
+            width="100%"
+          >
+            <source
+              src="https://res.cloudinary.com/dnuq1lgqs/video/upload/v1610357653/Umang_y3rb3k.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support HTML5 video.
+          </video>
           <div className="banner-overlay">
             <div className="title">UTSAH 2022</div>
-            <div className="line-1">Ray of Hope...</div>
+            <div className="line-1">FESTIVAL OF ETHHUSIAM AND ECSTASY</div>
             <div className="line-2">
-              15 August  2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
+              15 August 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
             </div>
             <a
               href="https://cutt.ly/registerNow"
@@ -26,7 +36,7 @@ const UmangContainer = () => {
                 className="register-btn round-btn"
                 style={{
                   backgroundcolor: "transparent",
-                  color: "rgb(255, 255, 255)",
+                  color: "rgb(0, 0, 128)",
                   border: "2px solid rgb(255, 255, 255)",
                 }}
               >
@@ -40,13 +50,13 @@ const UmangContainer = () => {
             <div className="title">About the Fest</div>
             <div className="desc">
               <p>
-                UTSAH is the thematic annual youth fest of IYF Ghaziabad
-                and is expected to be participated by 500+ youths. The festival
-                would project Rock music band, Quiz with exciting prizes,
-                Motivational talks by leading personalities, Panel Discussion on
-                current issues and full Dinner Buffet for all the participants.
-                It will be attended by several institute directors, faculties.
-                artists, and scholars from all across Delhi/NCR.
+                UTSAH is the thematic annual youth fest of IYF Ghaziabad and is
+                expected to be participated by 500+ youths. The festival would
+                project Rock music band, Quiz with exciting prizes, Motivational
+                talks by leading personalities, Panel Discussion on current
+                issues and full Dinner Buffet for all the participants. It will
+                be attended by several institute directors, faculties. artists,
+                and scholars from all across Delhi/NCR.
               </p>
             </div>
           </div>
@@ -70,7 +80,7 @@ const UmangContainer = () => {
               <div className="detail"> 15 August 2022</div>
             </div>
             <div className="poster">
-              <img src="https://res.cloudinary.com/xyzttt/image/upload/v1654711498/WhatsApp_Image_2022-06-08_at_11.33.20_PM_yihv4f.jpg" />
+              <img src="https://res.cloudinary.com/xyzttt/image/upload/v1657433886/WhatsApp_Image_2022-07-01_at_11.24.21_AM_bcfm60.jpg" />
             </div>
           </div>
         </div>
@@ -87,10 +97,10 @@ const UmangContainer = () => {
               <div className="detail">
                 <div className="heading">Enlightening Talk</div>
                 <div className="desc-1">HG Ram bhadra Das</div>
-                <div className="desc-2">
-                  Founder, Siksharthakam Educator Community
-                </div>
-                <div className="desc-2">M. Tech. IIT Kharagpur</div>
+                {/* <div className="desc-2">
+                  
+                </div> */}
+                <div className="desc-2">B. Tech, Life Coach & Temple President Iskcon Gurugram.</div>
               </div>
             </div>
             <div
@@ -190,7 +200,7 @@ const UmangContainer = () => {
         <div className="fest-details">
           <div className="part">
             <div className="up-title">THEME</div>
-            <div className="title">5 Life Lessons from Bhagavad Gita</div>
+            <div className="title">Azadi Ka Amrit Mahotsav</div>
             <p className="para">
               Once titled Golden Bird, Vishwa Guru, India has now come way ahead
               only to realize that the paradise is lost. The countless glories
