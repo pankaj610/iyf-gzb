@@ -23,7 +23,7 @@ const UmangContainer = () => {
           </video>
           <div className="banner-overlay">
             <div className="title">UTSAH 2022</div>
-            <div className="line-1">FESTIVAL OF ETHHUSIAM AND ECSTASY</div>
+            <div className="line-1">FESTIVAL OF ETHUSIASM AND ECSTASY</div>
             <div className="line-2">
               15 August 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
             </div>
@@ -36,7 +36,7 @@ const UmangContainer = () => {
                 className="register-btn round-btn"
                 style={{
                   backgroundcolor: "transparent",
-                  color: "rgb(0, 0, 128)",
+                  color: "rgb(128, 0, 10)",
                   border: "2px solid rgb(255, 255, 255)",
                 }}
               >
@@ -64,7 +64,7 @@ const UmangContainer = () => {
             <div className="details">
               <div className="heading">THEME</div>
               <div className="detail">
-                5 Life Changing Lessons from Bhagavad Gita
+                Our Life in Two Wheels
               </div>
               <div className="heading">WHERE</div>
               <div className="detail">
@@ -85,7 +85,7 @@ const UmangContainer = () => {
           </div>
         </div>
         <div className="event-container">
-          <div className="title">Events.</div>
+          <div className="title">Events</div>
           <div className="event-cards">
             <div
               className="card"
@@ -100,7 +100,7 @@ const UmangContainer = () => {
                 {/* <div className="desc-2">
                   
                 </div> */}
-                <div className="desc-2">B. Tech, Life Coach & Temple President Iskcon Gurugram.</div>
+                <div className="desc-2">Temple President ISKCON Gurugram & Life Coach</div>
               </div>
             </div>
             <div
@@ -113,7 +113,7 @@ const UmangContainer = () => {
               <div className="detail">
                 <div className="heading">Theatrical Performance</div>
                 <div className="desc-2">
-                  which broadcasts a strong relevant message.
+                  <b>Mera Bharat Mahaan</b>
                 </div>
               </div>
             </div>
@@ -143,20 +143,20 @@ const UmangContainer = () => {
                 </div>
               </div>
             </div>
-            <div
+            {/* <div
               className="card"
               style={{
                 background:
                   "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644671180/pexels-wesley-carvalho-3622614_wezym7.jpg') center center / cover no-repeat",
               }}
-            >
-              <div className="detail">
-                <div className="heading">Talent Hunt</div>
+            > */}
+              {/* <div className="detail"> */}
+                {/* <div className="heading">Talent Hunt</div>
                 <div className="desc-2">
                   Showcase your Talent &amp; Win Exciting Prizes
                 </div>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
             <div
               className="card"
               style={{
@@ -200,7 +200,7 @@ const UmangContainer = () => {
         <div className="fest-details">
           <div className="part">
             <div className="up-title">THEME</div>
-            <div className="title">Azadi Ka Amrit Mahotsav</div>
+            <div className="title">Our Life on Two Wheels</div>
             <p className="para">
               Once titled Golden Bird, Vishwa Guru, India has now come way ahead
               only to realize that the paradise is lost. The countless glories
