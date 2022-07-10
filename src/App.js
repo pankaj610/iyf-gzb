@@ -6,6 +6,8 @@ import AboutContainer from "./containers/AboutContainer";
 import TncContainer from "./containers/TncContainer";
 import PrivacyContainer from "./containers/PrivacyContainer";
 import RefundContainer from "./containers/RefundContainer";
+import UmangVolunteerContainer from "./containers/UmangVolunteerContainer";
+import UmangRegListContainer from "./containers/UmangRegListContainer";
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
           <Route path="/tnc" element={<TncContainer />} exact/>
           <Route path="/refund" element={<RefundContainer />} exact/>
           <Route path="/privacy" element={<PrivacyContainer />} exact/>
+          <Route path="/umang" element={<UmangContainer />} exact/>
+          <Route path="/umang/volunteer" element={<UmangVolunteerContainer />} exact/>
+          <Route path="/umang/list" element={<UmangRegListContainer />} exact/>
         </Routes>
       </Router>
     </div>
