@@ -80,7 +80,7 @@ const UmangContainer = () => {
               <div className="detail"> 15 August 2022</div>
             </div>
             <div className="poster">
-              <img src="https://res.cloudinary.com/xyzttt/image/upload/v1654711498/WhatsApp_Image_2022-06-08_at_11.33.20_PM_yihv4f.jpg" />
+              <img src="https://res.cloudinary.com/xyzttt/image/upload/v1657433886/WhatsApp_Image_2022-07-01_at_11.24.21_AM_bcfm60.jpg" />
             </div>
           </div>
         </div>
@@ -97,10 +97,10 @@ const UmangContainer = () => {
               <div className="detail">
                 <div className="heading">Enlightening Talk</div>
                 <div className="desc-1">HG Ram bhadra Das</div>
-                <div className="desc-2">
-                  Founder, Siksharthakam Educator Community
-                </div>
-                <div className="desc-2">B. Tech. Punjab Technical</div>
+                {/* <div className="desc-2">
+                  
+                </div> */}
+                <div className="desc-2">B. Tech, Life Coach & Temple President Iskcon Gurugram.</div>
               </div>
             </div>
             <div
@@ -200,7 +200,7 @@ const UmangContainer = () => {
         <div className="fest-details">
           <div className="part">
             <div className="up-title">THEME</div>
-            <div className="title">5 Life Lessons from Bhagavad Gita</div>
+            <div className="title">Azadi Ka Amrit Mahotsav</div>
             <p className="para">
               Once titled Golden Bird, Vishwa Guru, India has now come way ahead
               only to realize that the paradise is lost. The countless glories
