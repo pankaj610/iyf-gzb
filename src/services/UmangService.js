@@ -16,8 +16,8 @@ export const createNewRegistration = (userDetails) => {
   return axios.post(BASE_URL + "/create", userDetails);
 };
 
-export const updateRegistration = (userDetails) => {
-  return axios.put(BASE_URL + "/users", userDetails);
+export const updateRegistration = ({_id, email, contact}) => {
+  return axios.put(BASE_URL + `/update/${_id}`, {email, contact});
 };
 
 export const fetchVolunteerList = () => {
@@ -33,8 +33,4 @@ export const markAttendance = (id, isPresent) => {
     id,
     isPresent,
   });
-};
-
-export const updateUser = (user) => {
-  return axios.post(BASE_URL + UPDATE_USER, user);
 };
