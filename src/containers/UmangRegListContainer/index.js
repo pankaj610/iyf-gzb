@@ -26,6 +26,10 @@ class UmangRegListContainer extends Component {
           data: res.data.map((reg) => ({
             ...reg,
             registeredOn: new Date(reg.registeredOn).toDateString(),
+            registeredBy: reg.tickets[0]?.registeredBy,
+            remarks: reg.tickets[0]?.remarks,
+            uuid: reg.tickets[0]?.ticket_id,
+            attendance: reg.tickets[0]?.present ? 'present' : 'absent'
           })),
         });
       })
@@ -139,23 +143,23 @@ class UmangRegListContainer extends Component {
   sendUpdateRequest = () => {
     const {
       editPopup: {
-        uuid,
+        _id,
         email,
         contact,
       },
     } = this.state;
     updateRegistration({
-      uuid,
+      _id,
       email,
       contact,
     })
-      .then((res) => {
+      .then(() => {
         const updatedData = this.state.data.map((participant) => {
-          if (participant.uuid === uuid) {
+          if (participant._id === _id) {
             return {
               ...participant,
-              email: res.data.user.email,
-              contact: res.data.user.contact,
+              email: email,
+              contact: contact,
             };
           }
           return participant;
@@ -198,7 +202,7 @@ class UmangRegListContainer extends Component {
           />
         </div>
         <DataTable
-          title="All Umang Registrations"
+          title="All UTSAH Registrations"
           columns={COLUMNS(this.handleButtonClick, disabled)}
           data={searchText.length ? filteredData : data}
           pagination

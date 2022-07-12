@@ -185,7 +185,7 @@ class UmangVolunteerContainer extends React.Component {
     } = this.state;
     return (
       <div className="umang-container">
-        <h1>GITA UTSAV REGISTRATION</h1>
+        <h1>UTSAH REGISTRATION</h1>
         <div className="form">
           <Input
             placeholder={"Name"}

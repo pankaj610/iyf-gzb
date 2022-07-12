@@ -4,9 +4,12 @@ export const ROUTE = {
     CONTACT_US: '/contact-us',
     WISDOM_BATCH: '/wisdom-batch',
     PRIVACY: '/privacy',
-    UMANG: '/umang',
-    UMANG_VOLUNTEER: '/umang/volunteer',
-    UMANG_LIST: '/umang/list',
+    UTSAH: '/utsah',
+    UTSAH_VOLUNTEER: '/utsah/volunteer',
+    UTSAH_LIST: '/utsah/list',
+    ABOUT: '/about',
+    TNC: '/tnc',
+    REFUND: '/refund',
 }
 
 export const CREATE_NEW_REGISTRATION = '/user/register';

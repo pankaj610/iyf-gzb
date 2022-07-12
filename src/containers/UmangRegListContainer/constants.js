@@ -73,7 +73,6 @@ export const COLUMNS = (cb, disabled) => [
           }}
           disabled={disabled}
           onClick={() => {
-            console.log('ttttttttttt',row);
             cb("attend", row);
           }}
         >

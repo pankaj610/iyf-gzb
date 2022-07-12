@@ -8,21 +8,22 @@ import PrivacyContainer from "./containers/PrivacyContainer";
 import RefundContainer from "./containers/RefundContainer";
 import UmangVolunteerContainer from "./containers/UmangVolunteerContainer";
 import UmangRegListContainer from "./containers/UmangRegListContainer";
+import { ROUTE } from "./constants";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<UmangContainer />} exact/>
-          <Route path="/contact-us" element={<ContactContainer />} exact/>
-          <Route path="/about" element={<AboutContainer />} exact/>
-          <Route path="/tnc" element={<TncContainer />} exact/>
-          <Route path="/refund" element={<RefundContainer />} exact/>
-          <Route path="/privacy" element={<PrivacyContainer />} exact/>
-          <Route path="/umang" element={<UmangContainer />} exact/>
-          <Route path="/umang/volunteer" element={<UmangVolunteerContainer />} exact/>
-          <Route path="/umang/list" element={<UmangRegListContainer />} exact/>
+          <Route path={ROUTE.HOME} element={<UmangContainer />} exact/>
+          <Route path={ROUTE.CONTACT_US} element={<ContactContainer />} exact/>
+          <Route path={ROUTE.ABOUT} element={<AboutContainer />} exact/>
+          <Route path={ROUTE.TNC} element={<TncContainer />} exact/>
+          <Route path={ROUTE.REFUND} element={<RefundContainer />} exact/>
+          <Route path={ROUTE.PRIVACY} element={<PrivacyContainer />} exact/>
+          <Route path={ROUTE.UTSAH} element={<UmangContainer />} exact/>
+          <Route path={ROUTE.UTSAH_VOLUNTEER} element={<UmangVolunteerContainer />} exact/>
+          <Route path={ROUTE.UTSAH_LIST} element={<UmangRegListContainer />} exact/>
         </Routes>
       </Router>
     </div>
