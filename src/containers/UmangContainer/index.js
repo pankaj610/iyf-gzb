@@ -7,15 +7,25 @@ const UmangContainer = () => {
     <div>
       <div className="umang-landing-page">
         <div className="banner">
-          {/* <video className="umang-bg-video" playsInline muted loop autoPlay width="100%">
-        <source src="https://res.cloudinary.com/dnuq1lgqs/video/upload/v1610357653/Umang_y3rb3k.mp4" type="video/mp4"/>
-        Your browser does not support HTML5 video.
-        </video> */}
+          <video
+            className="umang-bg-video"
+            playsInline
+            muted
+            loop
+            autoPlay
+            width="100%"
+          >
+            <source
+              src="https://res.cloudinary.com/dnuq1lgqs/video/upload/v1610357653/Umang_y3rb3k.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support HTML5 video.
+          </video>
           <div className="banner-overlay">
-            <div className="title">UMANG 2022</div>
-            <div className="line-1">Ray of Hope...</div>
+            <div className="title">UTSAH 2022</div>
+            <div className="line-1">FESTIVAL OF ETHUSIASM AND ECSTASY</div>
             <div className="line-2">
-              26 MARCH 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
+              15 August 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
             </div>
             <a
               href="https://cutt.ly/registerNow"
@@ -26,7 +36,7 @@ const UmangContainer = () => {
                 className="register-btn round-btn"
                 style={{
                   backgroundcolor: "transparent",
-                  color: "rgb(255, 255, 255)",
+                  color: "rgb(128, 0, 10)",
                   border: "2px solid rgb(255, 255, 255)",
                 }}
               >
@@ -40,13 +50,13 @@ const UmangContainer = () => {
             <div className="title">About the Fest</div>
             <div className="desc">
               <p>
-                UMANG is the thematic annual youth fest of IYF Ghaziabad
-                and is expected to be participated by 500+ youths. The festival
-                would project Rock music band, Quiz with exciting prizes,
-                Motivational talks by leading personalities, Panel Discussion on
-                current issues and full Dinner Buffet for all the participants.
-                It will be attended by several institute directors, faculties.
-                artists, and scholars from all across Delhi/NCR.
+                UTSAH is the thematic annual youth fest of IYF Ghaziabad and is
+                expected to be participated by 500+ youths. The festival would
+                project Rock music band, Quiz with exciting prizes, Motivational
+                talks by leading personalities, Panel Discussion on current
+                issues and full Dinner Buffet for all the participants. It will
+                be attended by several institute directors, faculties. artists,
+                and scholars from all across Delhi/NCR.
               </p>
             </div>
           </div>
@@ -54,7 +64,7 @@ const UmangContainer = () => {
             <div className="details">
               <div className="heading">THEME</div>
               <div className="detail">
-                5 Life Changing Lessons from Bhagavad Gita
+                Our Life in Two Wheels
               </div>
               <div className="heading">WHERE</div>
               <div className="detail">
@@ -67,15 +77,15 @@ const UmangContainer = () => {
                 </a>
               </div>
               <div className="heading">WHEN</div>
-              <div className="detail">26 March 2022</div>
+              <div className="detail"> 15 August 2022</div>
             </div>
             <div className="poster">
-              <img src="https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644658407/Gita_Utsav_Poster_yntoyh.jpg" />
+              <img src="https://res.cloudinary.com/xyzttt/image/upload/v1657433886/WhatsApp_Image_2022-07-01_at_11.24.21_AM_bcfm60.jpg" />
             </div>
           </div>
         </div>
         <div className="event-container">
-          <div className="title">Events.</div>
+          <div className="title">Events</div>
           <div className="event-cards">
             <div
               className="card"
@@ -86,11 +96,11 @@ const UmangContainer = () => {
             >
               <div className="detail">
                 <div className="heading">Enlightening Talk</div>
-                <div className="desc-1">HG Ashraya Krishna Das</div>
-                <div className="desc-2">
-                  Founder, Siksharthakam Educator Community
-                </div>
-                <div className="desc-2">M. Tech. IIT Kharagpur</div>
+                <div className="desc-1">HG Ram bhadra Das</div>
+                {/* <div className="desc-2">
+                  
+                </div> */}
+                <div className="desc-2">Temple President ISKCON Gurugram & Life Coach</div>
               </div>
             </div>
             <div
@@ -103,7 +113,7 @@ const UmangContainer = () => {
               <div className="detail">
                 <div className="heading">Theatrical Performance</div>
                 <div className="desc-2">
-                  which broadcasts a strong relevant message.
+                  <b>Mera Bharat Mahaan</b>
                 </div>
               </div>
             </div>
@@ -133,20 +143,20 @@ const UmangContainer = () => {
                 </div>
               </div>
             </div>
-            <div
+            {/* <div
               className="card"
               style={{
                 background:
                   "linear-gradient(rgba(29, 33, 82, 0.667) 80%, rgba(29, 33, 82, 0.667) 80%) no-repeat, url('https://res.cloudinary.com/dnuq1lgqs/image/upload/v1644671180/pexels-wesley-carvalho-3622614_wezym7.jpg') center center / cover no-repeat",
               }}
-            >
-              <div className="detail">
-                <div className="heading">Talent Hunt</div>
+            > */}
+              {/* <div className="detail"> */}
+                {/* <div className="heading">Talent Hunt</div>
                 <div className="desc-2">
                   Showcase your Talent &amp; Win Exciting Prizes
                 </div>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
             <div
               className="card"
               style={{
@@ -190,7 +200,7 @@ const UmangContainer = () => {
         <div className="fest-details">
           <div className="part">
             <div className="up-title">THEME</div>
-            <div className="title">5 Life Lessons from Bhagavad Gita</div>
+            <div className="title">Our Life on Two Wheels</div>
             <p className="para">
               Once titled Golden Bird, Vishwa Guru, India has now come way ahead
               only to realize that the paradise is lost. The countless glories
