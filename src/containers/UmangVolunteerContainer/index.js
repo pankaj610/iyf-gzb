@@ -157,7 +157,7 @@ class UmangVolunteerContainer extends React.Component {
             remarks: "",
           });
           alert(
-            `Registration successfully done. Ticket ID is ${res.data.user.uuid}.`
+            `Registration successfully done. Ticket ID is ${res.data?.ticket?.ticket_id}.`
           );
           this.setState({
             disableBtn: false
@@ -165,6 +165,9 @@ class UmangVolunteerContainer extends React.Component {
         })
         .catch((e) => {
           alert("Error:", JSON.stringify(e));
+        });
+        this.setState({
+          disableBtn: false
         });
     } else {
       alert("Please fill details");
