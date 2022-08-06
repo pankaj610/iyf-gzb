@@ -216,15 +216,13 @@ class UmangRegListContainer extends Component {
                       if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'present').length > 0) {
                           alert("Devotee already present");
                       }  else if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'absent').length > 0) {
-                        this.setState({qrScanner: false});
+                        // this.setState({qrScanner: false});
                         this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
                       } else {
                         alert("Ticket not found");
                       }
-                      this.setState({qrScanner: false, searchText: parsedTicketData.ticketId});
+                      this.setState({searchText: parsedTicketData.ticketId});
                       this.onSearch({target: {value: parsedTicketData.ticketId}});
-                      throw "stopping camera";
-                      // return;
                     }
                   }
                 }}
