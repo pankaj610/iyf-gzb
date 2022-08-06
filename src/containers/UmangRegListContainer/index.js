@@ -224,7 +224,6 @@ class UmangRegListContainer extends Component {
                       this.setState({qrScanner: false, searchText: parsedTicketData.ticketId});
                       this.onSearch({target: {value: parsedTicketData.ticketId}});
                       throw "stopping camera";
-                      this.qrRef?.stopCamera?.();
                       // return;
                     }
                   }
