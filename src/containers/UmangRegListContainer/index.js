@@ -110,9 +110,12 @@ class UmangRegListContainer extends Component {
     });
   };
 
-  handleMarkAttendance(ticketId, isPresent) {
+  handleMarkAttendance(ticketId, isPresent, name = null) {
     markAttendance(ticketId, isPresent)
           .then((res) => {
+            if(name) {
+              alert(`Hare Krishna ${name} prbhu, Your attendance is marked successfully.`);
+            }
             this.setState({
               data: res.data.map((reg) => ({
                 ...reg,
@@ -203,10 +206,9 @@ class UmangRegListContainer extends Component {
             {this.state.qrScanner ? <QrReader
                 onError={(err)=> {alert(err)}}
                 onResult={(result, error) => {
-                  if (!!result) { 
+                  if (!!result) {  
                     let parsedTicketData = JSON.parse(result.text);
-                    this.handleMarkAttendance(parsedTicketData.ticketId, true);
-                    alert(`Hare Krishna ${parsedTicketData.name} prbhu, Your attendance is marked successfully.`)
+                    this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
                   }
                 }}
                 style={{ width: "500px", heigth: "500px" }}
