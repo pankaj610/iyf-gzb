@@ -242,7 +242,7 @@ class UmangRegListContainer extends Component {
           />
         </div>
         <DataTable
-          title="All UTSAH Registrations"
+          title={`All UTSAH Registrations | Total (${this.state.data?.length}) | Present(${this.state.data?.filter(el=> el.attendance === 'present').length})`}
           columns={COLUMNS(this.handleButtonClick, disabled)}
           data={searchText.length ? filteredData : data}
           pagination
