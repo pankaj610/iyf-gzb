@@ -126,6 +126,8 @@ class UmangRegListContainer extends Component {
                 attendance: reg.tickets[0]?.present ? 'present' : 'absent'
               })),
               disabled: false,
+            }, ()=> {
+              this.onSearch({target: {value: this.state.searchText}});
             });
           })
           .catch((err) => {
@@ -204,11 +206,24 @@ class UmangRegListContainer extends Component {
           </a>
           <div style={{ width: "500px", heigth: "500px" }}>
             {this.state.qrScanner ? <QrReader
+                ref={(ref)=> this.qrRef = ref}
+                scanDelay={200}
                 onError={(err)=> {alert(err)}}
                 onResult={(result, error) => {
                   if (!!result) {  
                     let parsedTicketData = JSON.parse(result.text);
-                    this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
+                    if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'present').length > 0) {
+                        alert("Devotee already present");
+                    }  else if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'absent').length > 0) {
+                      this.setState({qrScanner: false});
+                      this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
+                    } else {
+                      alert("Ticket not found");
+                    }
+                    this.setState({qrScanner: false, searchText: parsedTicketData.ticketId});
+                    this.onSearch({target: {value: parsedTicketData.ticketId}});
+                    this.qrRef.stopCamera()
+                    return;
                   }
                 }}
                 style={{ width: "500px", heigth: "500px" }}
