@@ -8,11 +8,8 @@ class RoundBtn extends React.Component {
         super(props);
         const {
             textColor,
-            bgColor,
-            hoverBgColor,
-            hoverTextColor,
-            outlineColor,
-            outlinePt,
+            bgColor, 
+            outlineColor, 
         } = this.props;
         this.state = {
             textColor,

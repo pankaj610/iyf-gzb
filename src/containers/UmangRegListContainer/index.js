@@ -6,7 +6,8 @@ import {
   updateRegistration,
 } from "../../services/UmangService";
 import { COLUMNS } from "./constants";
-import "./style.scss";
+import "./style.scss"; 
+import { QrReader } from 'react-qr-reader';
 
 class UmangRegListContainer extends Component {
   constructor(props) {
@@ -17,6 +18,9 @@ class UmangRegListContainer extends Component {
       searchText: "",
       editPopup: null,
       viewPopup: null,
+      showDialog: true,
+      processing: true,
+      qrScanner: false
     };
   }
   componentDidMount() {
@@ -106,6 +110,27 @@ class UmangRegListContainer extends Component {
     });
   };
 
+  handleMarkAttendance(ticketId, isPresent) {
+    markAttendance(ticketId, isPresent)
+          .then((res) => {
+            this.setState({
+              data: res.data.map((reg) => ({
+                ...reg,
+                registeredOn: new Date(reg.registeredOn).toDateString(),
+                registeredBy: reg.tickets[0]?.registeredBy,
+                remarks: reg.tickets[0]?.remarks,
+                uuid: reg.tickets[0]?.ticket_id,
+                attendance: reg.tickets[0]?.present ? 'present' : 'absent'
+              })),
+              disabled: false,
+            });
+          })
+          .catch((err) => {
+            this.setState({ disabled: false });
+            alert(err?.response?.data?.message || err.message);
+          });
+  }
+
   handleButtonClick = (type, row) => {
     switch (type) {
       case "edit": {
@@ -118,23 +143,7 @@ class UmangRegListContainer extends Component {
       }
       case "attend": {
         this.setState({ disabled: true });
-        markAttendance(row.uuid, row.attendance === "absent" ? "present" : "absent")
-          .then((res) => {
-            const updatedData = this.state.data.map((participant) => {
-              if (participant.uuid === row.uuid) {
-                participant.attendance = row.attendance === "absent" ? "present" : "absent";
-              }
-              return participant;
-            });
-            this.setState({
-              data: updatedData,
-              disabled: false,
-            });
-          })
-          .catch((err) => {
-            this.setState({ disabled: false });
-            alert(err.message);
-          });
+        this.handleMarkAttendance(row.uuid, row.attendance === "absent" ? true : false);
       }
       default:
     }
@@ -180,8 +189,7 @@ class UmangRegListContainer extends Component {
   render() {
     const { data, searchText, filteredData, editPopup, viewPopup, disabled } =
       this.state;
-    return (
-      <div className="reg-list-container">
+    return (<div className="reg-list-container">
         <div className="header-bar">
           <a
             ref={(ref) => {
@@ -191,6 +199,21 @@ class UmangRegListContainer extends Component {
           >
             <button>Export to CSV</button>
           </a>
+          <div style={{ width: "500px", heigth: "500px" }}>
+            {this.state.qrScanner ? <QrReader
+                onError={(err)=> {alert(err)}}
+                onResult={(result, error) => {
+                  if (!!result) { 
+                    let parsedTicketData = JSON.parse(result.text);
+                    this.handleMarkAttendance(parsedTicketData.ticketId, true);
+                    alert(`Hare Krishna ${parsedTicketData.name} prbhu, Your attendance is marked successfully.`)
+                  }
+                }}
+                style={{ width: "500px", heigth: "500px" }}
+              />: <button onClick={()=> {
+                this.setState({qrScanner: true});
+              }}>Show Qr Scanner</button>}
+          </div>
           <input
             autoComplete="off"
             id="search"
@@ -295,8 +318,9 @@ class UmangRegListContainer extends Component {
             </div>
           </div>
         )}
+        
       </div>
-    );
+      );
   }
 }
 

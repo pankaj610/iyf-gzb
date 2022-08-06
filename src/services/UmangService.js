@@ -1,10 +1,6 @@
 import axios from "axios";
-import {
-  CREATE_NEW_REGISTRATION,
-  FETCH_ALL_USERS,
-  FETCH_VOLUNTEER_LIST,
-  MARK_ATTENDANCE,
-  UPDATE_USER,
+import { 
+  FETCH_VOLUNTEER_LIST, 
 } from "../constants";
 
 // const BASE_URL = 'https://iyfapi.herokuapp.com';
@@ -28,9 +24,9 @@ export const fetchAllRegistrations = () => {
   return axios.get(BASE_URL + "/list");
 };
 
-export const markAttendance = (id, isPresent) => {
-  return axios.put(BASE_URL + "/users/attendance", {
-    id,
-    isPresent,
+export const markAttendance = (id, present) => {
+  return axios.post(BASE_URL + "/attendance", {
+    ticket_id: id,
+    present: present,
   });
 };
