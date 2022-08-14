@@ -1,9 +1,15 @@
 @import "../../styles/constants.scss";
 @import "../../styles/mixins.scss";
 
+@media (max-width:600px) { 
+    .reg-list-container { 
+        margin: 10px 10px !important;
+    }
+}
+
 .reg-list-container {
     margin: 50px 40px;
-
+    
     .header-bar {
         display: flex;
         align-items: center;
@@ -14,6 +20,11 @@
         #search {
             width: 350px;
         }
+        .qr-video {
+            width: 500px;
+            height: 500px;
+        }
+        
     }
     .popup-outer {
         background-color: rgba(0,0,0,0.6);

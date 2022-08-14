@@ -194,21 +194,16 @@ class UmangRegListContainer extends Component {
   render() {
     const { data, searchText, filteredData, editPopup, viewPopup, disabled } =
       this.state;
+      const isMobile = window.screen.width <= 600;
+      const width = isMobile ? window.screen.width - 20 : window.screen.width/4;
+      console.log(width);
     return (<div className="reg-list-container">
-        <div className="header-bar">
-          <a
-            ref={(ref) => {
-              this.exportRef = ref;
-            }}
-            onClick={() => this.downloadCSV(data)}
-          >
-            <button>Export to CSV</button>
-          </a>
-          <div style={{ width: "500px", heigth: "500px" }}>
-            {this.state.qrScanner ? <QrReader
+        <div style={{ width: width+"px", heigth: width+"px", alignSelf: "center" }}>
+          {this.state.qrScanner ? <QrReader
                 ref={(ref)=> this.qrRef = ref}
                 scanDelay={500}
                 onError={(err)=> {alert(err)}}
+                facingMode='rear'
                 onResult={(result, error) => {
                   if (!!result) {  
                     if(this.state.qrScanner) {
@@ -225,11 +220,26 @@ class UmangRegListContainer extends Component {
                       this.onSearch({target: {value: parsedTicketData.ticketId}});
                     }
                   }
-                }}
-                style={{ width: "500px", heigth: "500px" }}
-              />: <button onClick={()=> {
+                }} 
+                
+              />: null}
+        </div>
+        <div className="header-bar"> 
+          <a
+            ref={(ref) => {
+              this.exportRef = ref;
+            }}
+            onClick={() => this.downloadCSV(data)} 
+          >
+            <button>Export to CSV</button>
+          </a>
+
+            
+          <div>
+            
+              <button onClick={()=> {
                 this.setState({qrScanner: true});
-              }}>Show Qr Scanner</button>}
+              }}>Show Qr Scanner</button>
           </div>
           <input
             autoComplete="off"
