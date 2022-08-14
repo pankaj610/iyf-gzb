@@ -203,7 +203,9 @@ class UmangRegListContainer extends Component {
                 ref={(ref)=> this.qrRef = ref}
                 scanDelay={500}
                 onError={(err)=> {alert(err)}}
-                facingMode='rear'
+                constraints={{
+                  facingMode: 'environment'
+              }}
                 onResult={(result, error) => {
                   if (!!result) {  
                     if(this.state.qrScanner) {
