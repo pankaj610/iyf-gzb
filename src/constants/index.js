@@ -10,6 +10,7 @@ export const ROUTE = {
     ABOUT: '/about',
     TNC: '/tnc',
     REFUND: '/refund',
+    DYS: '/dys'
 }
 
 export const CREATE_NEW_REGISTRATION = '/user/register';
