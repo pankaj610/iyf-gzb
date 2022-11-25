@@ -10,6 +10,7 @@ import UmangVolunteerContainer from "./containers/UmangVolunteerContainer";
 import UmangRegListContainer from "./containers/UmangRegListContainer";
 import { ROUTE } from "./constants";
 import DysRegistrationForm from "./containers/DysRegistrationForm";
+import DysRegListContainer from "./containers/DysRegListContainer";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path={ROUTE.UTSAH_VOLUNTEER} element={<UmangVolunteerContainer />} exact/>
           <Route path={ROUTE.UTSAH_LIST} element={<UmangRegListContainer />} exact/>
           <Route path={ROUTE.DYS} element={<DysRegistrationForm/>} exact/>
+          <Route path={ROUTE.DYS_LIST} element={<DysRegListContainer/> } exact/>
         </Routes>
       </Router>
     </div>

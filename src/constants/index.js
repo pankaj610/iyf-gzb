@@ -10,7 +10,8 @@ export const ROUTE = {
     ABOUT: '/about',
     TNC: '/tnc',
     REFUND: '/refund',
-    DYS: '/dys'
+    DYS: '/dys',
+    DYS_LIST: '/dys/list',
 }
 
 export const CREATE_NEW_REGISTRATION = '/user/register';
@@ -18,3 +19,4 @@ export const FETCH_VOLUNTEER_LIST = '/user/volunteers';
 export const FETCH_ALL_USERS = '/user/fetchAll';
 export const MARK_ATTENDANCE = '/user/markAttendance';
 export const UPDATE_USER = '/user/update';
+export const DYS_LIST = 'api/devotee/list';
