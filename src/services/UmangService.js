@@ -28,10 +28,14 @@ export const updateRegistration = ({_id, email, contact}) => {
 export const fetchVolunteerList = () => {
   return axios.get(BASE_URL + FETCH_VOLUNTEER_LIST);
 };
+
 export const fetchDysRegList = () =>{
-  return axios.get('http://localhost:8000/api/devotee/list');
+  return axios.get(BASE_URL + '/list');
 }
 
+export const fetchDysRegistrations = () => {
+  return axios.get(BASE_URL + "/dysList");
+}
 
 export const fetchAllRegistrations = () => {
   return axios.get(BASE_URL + "/list");
@@ -44,3 +48,11 @@ export const markAttendance = (id, present) => {
     present: present,
   });
 };
+
+export const markDysAttendance = (ticketId, sessionId, present) => {
+  return axios.post(BASE_URL + "/dysAttendance", {
+    ticket_id: ticketId,
+    present: present,
+    session_id: sessionId
+  })
+}

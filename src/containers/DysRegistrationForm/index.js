@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import { createNewDysRegistration } from "../../services/UmangService";
-// import { placeholder } from "react-bootstrap";
+import Input from "../../ui/Input";
+export const transformName = (name) => {
+  return name.split("_").join(" ").toUpperCase()
+}
 
 const DysRegistrationForm = () => {
-  const initialValues = {name: "", email: "", contact: "", dob: "", area:"", occupation: "", connectedby:""};
+  const initialValues = {name: "", email: "", contact: "", dob: "", area:"", occupation: "", registeredBy:""};
+  const volunteers = [
+    "Kanu Mohan Das", 
+    "Pankaj Verma",  
+    "Shubham Tiwari Das", 
+    
+];
   const [formValues, setFormValues]=useState(initialValues)
 
   const handleChange = (e) => {
@@ -15,14 +24,16 @@ const DysRegistrationForm = () => {
 
   const registerForDys =()=> {
     console.log(formValues);
-    const {name, email , contact, dob, area, occupation,connectedby}= formValues
-    if( name && email && contact && dob && area && occupation && connectedby){
-      createNewDysRegistration({name , email, contact,dob, area, occupation, connectedBy:connectedby}).then((response)=>{
-        console.log(response);
+    const {name, email , contact, dob, area, occupation,registeredBy}= formValues
+    if( name && email && contact && dob && area && occupation && registeredBy){
+      createNewDysRegistration({name , email, contact,dob, area, occupation, connectedBy:registeredBy}).then((response)=>{
         setFormValues(initialValues);
-        const data=response.data;
-        alert(data?.ticket?.ticket_id);
-
+        const data=response.data; 
+        if(data?.message) {
+          alert(data.message);
+        } else {
+          alert("DYS is registered successfully. Ticket Id: ", data?.ticket?.ticket_id);
+        }
       })
     }
 
@@ -160,16 +171,27 @@ const DysRegistrationForm = () => {
           />
         </div>
         <div className="input-group mb-3">
-          <input
-            type="text"
+          <Input
+            placeholder={"Registered by"}
+            setValue={(name, value)=> handleChange({target:{name, value}})}
             value={formValues.connectedby}
+            name="registeredBy"
+            type="select"
+            options={volunteers.map((v) => ({
+              label: transformName(v),
+              value: v,
+            }))}
+            className="full input w-100" 
+          />
+          {/* <input
+            type="text" 
             className="form-control"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
             placeholder="Connected By"
-            onChange={handleChange}
+            onChange={}
             name="connectedby"
-          />
+          /> */}
         </div>
         {/* <div className="input-group mb-3">
           <input
