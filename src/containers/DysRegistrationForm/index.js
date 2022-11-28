@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import { createNewDysRegistration } from "../../services/UmangService";
 import Input from "../../ui/Input";
 export const transformName = (name) => {
+  if(name === "") {
+    return "Select";
+  }
   return name.split("_").join(" ").toUpperCase()
 }
 
 const DysRegistrationForm = () => {
-  const initialValues = {name: "", email: "", contact: "", dob: "", area:"", occupation: "", registeredBy:""};
+  const initialValues = {name: "", email: "", contact: "", dob: "", area:"", occupation: "", registeredBy:"", remarks: ""};
   const volunteers = [
+    "", 
     "Kanu Mohan Das", 
     "Pankaj Verma",  
     "Shubham Tiwari Das", 
     
 ];
-  const [formValues, setFormValues]=useState(initialValues)
+  const [formValues, setFormValues]=useState(initialValues);
+ 
 
   const handleChange = (e) => {
     console.log(e.target);
@@ -21,13 +26,17 @@ const DysRegistrationForm = () => {
     setFormValues({...formValues,[name]:value})
   }
 
+  const resetForm = ()=> {
+    setFormValues({...initialValues, registeredBy: '0'});
+  }
+
 
   const registerForDys =()=> {
     console.log(formValues);
-    const {name, email , contact, dob, area, occupation,registeredBy}= formValues
-    if( name && email && contact && dob && area && occupation && registeredBy){
-      createNewDysRegistration({name , email, contact,dob, area, occupation, connectedBy:registeredBy}).then((response)=>{
-        setFormValues(initialValues);
+    const {name, email , contact, dob, area, occupation,registeredBy, remarks}= formValues;
+    if( name && email && contact && dob && area && occupation && registeredBy && remarks){
+      createNewDysRegistration({name , email, contact,dob, area, occupation, registeredBy, remarks}).then((response)=>{
+        resetForm();
         const data=response.data; 
         if(data?.message) {
           alert(data.message);
@@ -36,9 +45,9 @@ const DysRegistrationForm = () => {
         }
       })
     }
-
-
   }
+
+  
   return (
     <>
       <div className="container">
@@ -174,7 +183,7 @@ const DysRegistrationForm = () => {
           <Input
             placeholder={"Registered by"}
             setValue={(name, value)=> handleChange({target:{name, value}})}
-            value={formValues.connectedby}
+            value={formValues.registeredBy}
             name="registeredBy"
             type="select"
             options={volunteers.map((v) => ({
@@ -183,15 +192,18 @@ const DysRegistrationForm = () => {
             }))}
             className="full input w-100" 
           />
-          {/* <input
+        </div>
+        <div className="input-group mb-3">
+          <input
             type="text" 
             className="form-control"
+            value={formValues.remarks}
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
-            placeholder="Connected By"
-            onChange={}
-            name="connectedby"
-          /> */}
+            placeholder="Remarks"
+            onChange={handleChange}
+            name="remarks"
+          />
         </div>
         {/* <div className="input-group mb-3">
           <input
@@ -217,6 +229,8 @@ const DysRegistrationForm = () => {
             onClick={registerForDys}
           ></input>
         </div>
+
+   
       </div>
     </>
   );

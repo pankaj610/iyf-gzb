@@ -1,13 +1,20 @@
+import "./styles.scss";
 import React from "react";
 import DataTable from "react-data-table-component";
 import { useState, useEffect } from "react";
 import {
   fetchDysRegistrations,
   markDysAttendance,
+  updateRegistration,
 } from "../../services/UmangService";
+import { DYS_COLUMNS } from "./constants";
 
 function DysRegListContainer() {
   const [dysRegistrations, setDysRegistrations] = useState([]);
+  const [{ editPopup, viewPopup }, setState] = useState({
+    editPopup: null,
+    viewPopup: null,
+  });
 
   const fetchDysRegList = async () => {
     fetchDysRegistrations()
@@ -19,74 +26,172 @@ function DysRegListContainer() {
         console.log(error);
       });
   };
-  const columns = [
-    {
-      name: "Name",
-      selector: (row) => row.devoteeInfo?.[0]?.name,
-    },
 
-    {
-      name: "Email",
-      selector: (row) => row.devoteeInfo?.[0]?.email,
-    },
-
-    {
-      name: "Contact",
-      selector: (row) => row.devoteeInfo?.[0]?.contact,
-    },
-    {
-      name: "Ticket Id",
-      selector: (row) => row.ticket_id,
-    },
-
-    {
-      name: "Batch",
-      selector: (row) => row.dys_batch,
-    },
-
-    {
-      name: "Attendance",
-      selector: (row) => {
-        const sessions = Object.keys(row.present);
-        const labels = sessions.map((session) => { 
-          if(session.indexOf("session") < 0 ) return null; // hide extra id key
-
-          const isPresent = row.present?.[session];
-          return (
-            <div>
-              <label>{session?.split("_").join(" ").toLocaleUpperCase()}</label>
-              <label style={{
-                      color: "white",
-                      background: isPresent ?  "#050" : "#666" ,
-                      border: "1px solid black",
-                      margin: "2px 8px",
-                      borderRadius: "4px",
-                      padding: "1px 4px",
-                    }} onClick={()=> markDysAttendance(row.ticket_id,session,!isPresent).then(response=> {
-                      const data = response.data;
-                      setDysRegistrations(data.dysList);
-                    })}>{ isPresent ? 'Mark Absent': 'Mark Present'}</label>
-            </div>
-          );
+  const handleRowActions = (type, row) => {
+    console.log(JSON.stringify(row, null, 2));
+    switch (type) {
+      case "mark_attendance":
+        markDysAttendance(
+          row.row?.ticket_id,
+          row?.session,
+          !row?.isPresent
+        ).then((response) => {
+          const data = response.data;
+          setDysRegistrations(data.dysList);
         });
-        return labels;
-      },
-    },
-  ];
+        break;
+      case "edit": {
+        setState({ editPopup: {...row} });
+        break;
+      }
+      case "view": {
+        setState({ viewPopup: {...row} });
+        break;
+      }
+      default:
+        break;
+    }
+  };
+
+  const sendUpdateRequest = () => { 
+    const { devoteeInfo } = editPopup;
+    const { _id, email, contact} = devoteeInfo?.[0] || {};
+    updateRegistration({
+      _id,
+      email,
+      contact,
+    })
+      .then(() => {
+        const updatedData = dysRegistrations.map((participant) => {
+          if (participant._id === _id) {
+            return {
+              ...participant,
+              email: email,
+              contact: contact,
+            };
+          }
+          return participant;
+        });
+        setState({
+          dysRegistrations: updatedData,
+          editPopup: null,
+        });
+      })
+      .catch((err) => { 
+        alert(err.message);
+        fetchDysRegList();
+        setState({
+          editPopup: null,
+        });
+      });
+  };
 
   useEffect(() => {
     fetchDysRegList();
   }, []);
 
   return (
-    <div>
+    <div className="reg-list-container">
       <DataTable
         title={`All DYS Registrations | Total (${dysRegistrations?.length}) `}
-        columns={columns}
-        data={dysRegistrations} 
+        columns={DYS_COLUMNS(handleRowActions, false)}
+        data={dysRegistrations}
         search={true}
+        selectableRows
         pagination
       />
+
+      {editPopup && (
+        <div
+          className="popup-outer"
+          onClick={() => {
+            setState({ editPopup: null });
+          }}
+        >
+          <div
+            className="popup-inner"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <ul className="edit-sheet">
+              <li>
+                Email
+                <br />
+                <b>
+                  <input
+                    autoComplete="off"
+                    value={editPopup?.devoteeInfo?.[0]?.email}
+                    onChange={(e) => {
+                      if(editPopup.devoteeInfo?.[0]) {
+                        editPopup.devoteeInfo[0].email = e.target.value;
+                        setState({
+                          editPopup: { ...editPopup, devoteeInfo: [editPopup?.devoteeInfo?.[0]] },
+                        });
+                      }
+                    }}
+                  />
+                </b>
+              </li>
+              <li>
+                Contact
+                <br />
+                <b>
+                  <input
+                    autoComplete="off"
+                    value={editPopup?.devoteeInfo?.[0]?.contact}
+                    onChange={(e) => {
+                      editPopup.devoteeInfo[0].contact = e.target.value;
+                        setState({
+                          editPopup: { ...editPopup, devoteeInfo: [editPopup?.devoteeInfo?.[0]] },
+                        });
+                    }}
+                  />
+                </b>
+              </li>
+            </ul>
+            <button onClick={sendUpdateRequest}>UPDATE</button>
+          </div>
+        </div>
+      )}
+      {viewPopup && (
+        <div
+          className="popup-outer"
+          onClick={() => setState({ viewPopup: null })}
+        >
+          <div
+            className="popup-inner"
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <ul className="view-sheet">
+              <li>
+                Ticket ID: <b>{viewPopup.ticket_id}</b>
+              </li>
+              <li>
+                Name: <b>{viewPopup?.devoteeInfo?.[0]?.name}</b>
+              </li>
+              <li>
+                Batch: <b>{viewPopup.dys_batch}</b>
+              </li>
+              <li>
+                Contact: <b>{viewPopup?.devoteeInfo?.[0]?.contact}</b>
+              </li>
+              <li>
+                Registered by: <b>{viewPopup.registeredBy}</b>
+              </li>
+              <li>
+                Remarks: <b>{viewPopup.remarks}</b>
+              </li>
+              <li>
+                Registered on:{" "}
+                <b>{new Date(viewPopup.registeredOn).toLocaleString()}</b>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
