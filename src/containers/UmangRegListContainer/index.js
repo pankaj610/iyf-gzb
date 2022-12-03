@@ -96,8 +96,7 @@ class UmangRegListContainer extends Component {
     const value = e.target.value;
     const lowered = value && value.toLowerCase();
     this.setState({
-      filteredData: data.filter((participant) => {
-        console.log(">>>", participant);
+      filteredData: data.filter((participant) => { 
         return (
           participant.uuid?.toLowerCase().includes(lowered) ||
           participant.name?.toLowerCase().includes(lowered) ||
@@ -126,6 +125,8 @@ class UmangRegListContainer extends Component {
                 attendance: reg.tickets[0]?.present ? 'present' : 'absent'
               })),
               disabled: false,
+            }, ()=> {
+              this.onSearch({target: {value: this.state.searchText}});
             });
           })
           .catch((err) => {
@@ -192,29 +193,54 @@ class UmangRegListContainer extends Component {
   render() {
     const { data, searchText, filteredData, editPopup, viewPopup, disabled } =
       this.state;
+      const isMobile = window.screen.width <= 600;
+      const width = isMobile ? window.screen.width - 20 : window.screen.width/4;
+      console.log(width);
     return (<div className="reg-list-container">
-        <div className="header-bar">
+        <div style={{ width: width+"px", heigth: width+"px", alignSelf: "center" }}>
+          {this.state.qrScanner ? <QrReader
+                ref={(ref)=> this.qrRef = ref}
+                scanDelay={500}
+                onError={(err)=> {alert(err)}}
+                constraints={{
+                  facingMode: 'environment'
+              }}
+                onResult={(result, error) => {
+                  if (!!result) {  
+                    if(this.state.qrScanner) {
+                      let parsedTicketData = JSON.parse(result.text);
+                      if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'present').length > 0) {
+                          alert("Devotee already present");
+                      }  else if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'absent').length > 0) {
+                        // this.setState({qrScanner: false});
+                        this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
+                      } else {
+                        alert("Ticket not found");
+                      }
+                      this.setState({searchText: parsedTicketData.ticketId});
+                      this.onSearch({target: {value: parsedTicketData.ticketId}});
+                    }
+                  }
+                }} 
+                
+              />: null}
+        </div>
+        <div className="header-bar"> 
           <a
             ref={(ref) => {
               this.exportRef = ref;
             }}
-            onClick={() => this.downloadCSV(data)}
+            onClick={() => this.downloadCSV(data)} 
           >
             <button>Export to CSV</button>
           </a>
-          <div style={{ width: "500px", heigth: "500px" }}>
-            {this.state.qrScanner ? <QrReader
-                onError={(err)=> {alert(err)}}
-                onResult={(result, error) => {
-                  if (!!result) {  
-                    let parsedTicketData = JSON.parse(result.text);
-                    this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
-                  }
-                }}
-                style={{ width: "500px", heigth: "500px" }}
-              />: <button onClick={()=> {
+
+            
+          <div>
+            
+              <button onClick={()=> {
                 this.setState({qrScanner: true});
-              }}>Show Qr Scanner</button>}
+              }}>Show Qr Scanner</button>
           </div>
           <input
             autoComplete="off"
@@ -227,7 +253,7 @@ class UmangRegListContainer extends Component {
           />
         </div>
         <DataTable
-          title="All UTSAH Registrations"
+          title={`All UTSAH Registrations | Total (${this.state.data?.length}) | Present(${this.state.data?.filter(el=> el.attendance === 'present').length})`}
           columns={COLUMNS(this.handleButtonClick, disabled)}
           data={searchText.length ? filteredData : data}
           pagination
