@@ -454,7 +454,7 @@ function DysRegListContainer() {
                   alert(err);
                 }}
                 constraints={{
-                  facingMode: front? "user": "environment",
+                  facingMode: front? "front": "rear",
                 }}
                 onResult={(result, error) => {
                   if (!!result) {
