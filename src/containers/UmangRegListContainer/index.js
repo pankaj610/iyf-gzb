@@ -96,8 +96,7 @@ class UmangRegListContainer extends Component {
     const value = e.target.value;
     const lowered = value && value.toLowerCase();
     this.setState({
-      filteredData: data.filter((participant) => {
-        console.log(">>>", participant);
+      filteredData: data.filter((participant) => { 
         return (
           participant.uuid?.toLowerCase().includes(lowered) ||
           participant.name?.toLowerCase().includes(lowered) ||

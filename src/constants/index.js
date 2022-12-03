@@ -12,6 +12,7 @@ export const ROUTE = {
     REFUND: '/refund',
     DYS: '/dys',
     DYS_LIST: '/dys/list',
+    DYS_LIST_SESSIN: '/dys/list/:session_id',
 }
 
 export const CREATE_NEW_REGISTRATION = '/user/register';

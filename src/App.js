@@ -27,6 +27,7 @@ function App() {
           <Route path={ROUTE.UTSAH_VOLUNTEER} element={<UmangVolunteerContainer />} exact/>
           <Route path={ROUTE.UTSAH_LIST} element={<UmangRegListContainer />} exact/>
           <Route path={ROUTE.DYS} element={<DysRegistrationForm/>} exact/>
+          <Route path={ROUTE.DYS_LIST_SESSIN} element={<DysRegListContainer/>} exact/>
           <Route path={ROUTE.DYS_LIST} element={<DysRegListContainer/> } exact/>
         </Routes>
       </Router>

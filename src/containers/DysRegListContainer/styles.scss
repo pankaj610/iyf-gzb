@@ -1,10 +1,15 @@
 @import "../../styles/constants.scss";
 @import "../../styles/mixins.scss";
 
+body {
+    background-image: url('https://vedabase.io/static/img/body-bg.jpg');
+}
+
 @media (max-width:600px) { 
     .reg-list-container { 
         margin: 10px 10px !important;
     }
+    
 }
 
 .reg-list-container {

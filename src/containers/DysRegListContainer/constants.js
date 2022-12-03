@@ -1,84 +1,81 @@
-export const DYS_COLUMNS = (cb, disabled) => [
-    {
-        name: "Name",
-        selector: (row) => row.devoteeInfo?.[0]?.name,
-      },
+import { Button, Col, Row } from "react-bootstrap";
+
+export const DYS_COLUMNS = (cb, disabled, session_id) => [
+  {
+    name: "Name",
+    selector: (row) => row.devoteeInfo?.[0]?.name,
+  },
+ 
   
-      {
-        name: "Email",
-        selector: (row) => row.devoteeInfo?.[0]?.email,
-      },
-  
-      {
-        name: "Contact",
-        selector: (row) => row.devoteeInfo?.[0]?.contact,
-      },
-      {
-        name: "Ticket Id",
-        selector: (row) => row.ticket_id,
-      },
-  
-      {
-        name: "Batch",
-        selector: (row) => row.dys_batch,
-      },
-  
-      {
-        name: "Attendance",
-        selector: (row) => {
-          const sessions = Object.keys(row.present);
-          const labels = sessions.map((session, key) => { 
-            if(session.indexOf("session") < 0 ) return null; // hide extra id key
-  
-            const isPresent = row.present?.[session];
-            return (
-              <div key={key}>
-                <label>{session?.split("_").join(" ").toLocaleUpperCase()}</label>
-                <label style={{
-                        color: "white",
-                        background: isPresent ?  "#050" : "#666" ,
-                        border: "1px solid black",
-                        margin: "2px 8px",
-                        borderRadius: "4px",
-                        padding: "1px 4px",
-                      }} onClick={()=>cb('mark_attendance', {row, isPresent,session})}>{ isPresent ? 'Mark Absent': 'Mark Present'}</label>
-              </div>
-            );
-          });
-          return labels;
-        },
-      },
-    {
-      name: "Action",
-      button: true,
-      cell: (row) => (
+  {
+    name: "Email",
+    selector: (row) => row.devoteeInfo?.[0]?.email,
+  },
+
+  {
+    name: "Contact",
+    selector: (row) => row.devoteeInfo?.[0]?.contact,
+  },
+  {
+    name: "Ticket Id",
+    selector: (row) => row.ticket_id,
+  },
+
+  {
+    name: "Batch",
+    selector: (row) => row.dys_batch?.replace("_", " ")?.toLocaleUpperCase(),
+  },
+  {
+    name: "Attendance",
+    selector: (row) => {
+      // const sessions = Object.keys(row.present);
+      // const session = sessions?.[session_id];
+      const isPresent = row.present?.[session_id];
+      return (
         <div>
-          <button
-            style={{
-              border: "1px solid black",
-              margin: "2px",
-              borderRadius: "4px",
-            }}
+          {session_id?.split("_").join(" ").toLocaleUpperCase()} &nbsp;
+          <Button variant={ isPresent ? "success": "secondary"}
+            onClick={() =>
+              cb("mark_attendance", { row, isPresent, session: session_id })
+            }
+            >
+            {isPresent ? "Mark Absent" : "Mark Present"}
+          </Button>
+        </div>
+      );
+    },
+  },
+
+  {
+    name: "Actions",
+    button: true,
+    selector: (row) => (
+      <Row>
+        <Col md={4} xs={5}>
+          <Button
+            variant="info"
+            className="text-white"
             onClick={() => {
               cb("view", row);
             }}
           >
-            View
-          </button>
-          <button
-            style={{
-              border: "1px solid black",
-              margin: "2px",
-              borderRadius: "4px",
-            }}
+            <i class="fa-sharp fa-solid fa-eye"></i> 
+            &nbsp; View
+          </Button>
+        </Col> 
+        <Col md={4} xs={5}>
+          <Button
+            variant="warning"
+            className="text-white"
             onClick={() => {
               cb("edit", row);
             }}
           >
-            Edit
-          </button>
-        </div>
-      ),
-    },
-  ];
-  
+            <i class="fa-solid fa-pen-to-square"></i> 
+            &nbsp; Edit
+          </Button>
+        </Col> 
+      </Row>
+    ),
+  }, 
+];
