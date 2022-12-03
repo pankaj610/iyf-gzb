@@ -20,8 +20,7 @@ const DysRegistrationForm = () => {
   const [formValues, setFormValues]=useState(initialValues);
  
 
-  const handleChange = (e) => {
-    console.log(e.target);
+  const handleChange = (e) => { 
     const {name, value } = e.target;
     setFormValues({...formValues,[name]:value})
   }
@@ -31,8 +30,7 @@ const DysRegistrationForm = () => {
   }
 
 
-  const registerForDys =()=> {
-    console.log(formValues);
+  const registerForDys =()=> { 
     const {name, email , contact, dob, area, occupation,registeredBy, remarks}= formValues;
     if( name && email && contact && dob && area && occupation && registeredBy && remarks){
       createNewDysRegistration({name , email, contact,dob, area, occupation, registeredBy, remarks}).then((response)=>{

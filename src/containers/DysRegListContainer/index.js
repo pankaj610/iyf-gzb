@@ -1,5 +1,5 @@
 import "./styles.scss";
-import React, { useMemo } from "react"; 
+import React, { useMemo, useRef } from "react";
 import { useState, useEffect } from "react";
 import {
   fetchDysRegistrations,
@@ -8,10 +8,11 @@ import {
 } from "../../services/UmangService";
 import { DYS_COLUMNS } from "./constants";
 import { CSVLink } from "react-csv";
-import { Form, Button,  Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Image, Card } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { Table, Tbody, Td, Th, Thead, Tr } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import { QrReader } from "react-qr-reader";
 
 function DysRegListContainer() {
   const [dysRegistrations, setDysRegistrations] = useState([]);
@@ -21,15 +22,17 @@ function DysRegListContainer() {
   const { session_id } = params || {};
 
   const navigate = useNavigate();
-  
 
-  
-  const [{ editPopup, viewPopup }, setState] = useState({
+  const qrRef = useRef();
+
+  const [{ editPopup, viewPopup, scanner, front, completed }, setState] = useState({
     editPopup: null,
     viewPopup: null,
+    scanner: false,
+    front: true,
+    completed: false,
   });
-  
-  
+
   const csvLink = useMemo(
     () => ({
       filename: "dysDevoteesList.csv",
@@ -37,8 +40,7 @@ function DysRegListContainer() {
       data: dysRegistrations,
     }),
     [dysRegistrations]
-    );
-  
+  );
 
   const dysSearchedRegistrations = useMemo(() => {
     const lowered = searchText && searchText.toLowerCase();
@@ -64,7 +66,7 @@ function DysRegListContainer() {
   }, [searchText, dysRegistrations]);
 
   useEffect(() => {
-    if(session_id) {
+    if (session_id) {
       fetchDysRegList();
     }
   }, [session_id]);
@@ -144,65 +146,126 @@ function DysRegListContainer() {
     setSearchInput(value);
   };
 
-  console.log({session_id});
-  if(!session_id) return (<Container className="container text-center" style={{ paddingTop: "30vh" }} fluid>
-    <h1 className="text-center">Please select DYS session</h1>
-      <Row>
-        <Col>
-          <Button variant="outline-success"  className="m-3" size="lg" onClick={()=> {
-            navigate(`/dys/list/session_1`);
-          }}>Session 1</Button>
-          <Button variant="outline-success" className="m-3"  size="lg" onClick={()=> {
-            navigate(`/dys/list/session_2`);
-          }}>Session 2</Button>
-          <Button variant="outline-success" className="m-3"  size="lg" onClick={()=> {
-            navigate(`/dys/list/session_3`);
-          }}>Session 3</Button>
-          <Button variant="outline-success" className="m-3"  size="lg" onClick={()=> {
-            navigate(`/dys/list/session_4`);
-          }}>Session 4</Button>
-          <Button variant="outline-success" className="m-3"  size="lg" onClick={()=> {
-            navigate(`/dys/list/session_5`);
-          }}>Session 5</Button>
-          <Button variant="outline-success"  className="m-3" size="lg" onClick={()=> {
-            navigate(`/dys/list/session_6`);
-          }}>Session 6</Button>
-        </Col>
-      </Row>
-      <Button variant="info"  className="m-3 text-white" size="lg" onClick={()=> {
-        navigate(`/dys`);
-      }}>Register for DYS</Button>
-  </Container>
-  )
-
+  console.log({ session_id });
+  if (!session_id)
+    return (
+      <Container
+        className="container text-center"
+        style={{ paddingTop: "30vh" }}
+        fluid
+      >
+        <h1 className="text-center">Please select DYS session</h1>
+        <Row>
+          <Col>
+            <Button
+              variant="outline-success"
+              className="m-3"
+              size="lg"
+              onClick={() => {
+                navigate(`/dys/list/session_1`);
+              }}
+            >
+              Session 1
+            </Button>
+            <Button
+              variant="outline-success"
+              className="m-3"
+              size="lg"
+              onClick={() => {
+                navigate(`/dys/list/session_2`);
+              }}
+            >
+              Session 2
+            </Button>
+            <Button
+              variant="outline-success"
+              className="m-3"
+              size="lg"
+              onClick={() => {
+                navigate(`/dys/list/session_3`);
+              }}
+            >
+              Session 3
+            </Button>
+            <Button
+              variant="outline-success"
+              className="m-3"
+              size="lg"
+              onClick={() => {
+                navigate(`/dys/list/session_4`);
+              }}
+            >
+              Session 4
+            </Button>
+            <Button
+              variant="outline-success"
+              className="m-3"
+              size="lg"
+              onClick={() => {
+                navigate(`/dys/list/session_5`);
+              }}
+            >
+              Session 5
+            </Button>
+            <Button
+              variant="outline-success"
+              className="m-3"
+              size="lg"
+              onClick={() => {
+                navigate(`/dys/list/session_6`);
+              }}
+            >
+              Session 6
+            </Button>
+          </Col>
+        </Row>
+        <Button
+          variant="info"
+          className="m-3 text-white"
+          size="lg"
+          onClick={() => {
+            navigate(`/dys`);
+          }}
+        >
+          Register for DYS
+        </Button>
+      </Container>
+    );
 
   return (
     <div className="reg-list-container">
       <h1 className="text-center">DYS Devotees</h1>
-      <div className="row mb-3">
-         <div className="col-md-1 col-sm-2 col-xs-2 mb-2">
-          <Button variant="warning" onClick={()=> {
-            navigate("/dys/list");
-          }}> 
-               <i class="fa-solid fa-arrow-left"></i>&nbsp; Back
+      <div className="row mb-3 d-flex">
+        <Col lg={2} md={2} sm={3} xs={4} className="mb-2">
+          <Button
+            variant="warning"
+            onClick={() => {
+              navigate("/dys/list");
+            }}
+          >
+            <i class="fa-solid fa-arrow-left"></i>&nbsp; Back
           </Button>
-        </div> 
-        <div className="col-md-2 col-sm-2 col-xs-6 mb-2">
+        </Col>
+        <Col lg={3} md={3} sm={5} xs={6}>
           <Button variant="success">
             <CSVLink
               {...csvLink}
               style={{ color: "white", textDecoration: "none" }}
-            > 
+            >
               <i class="fa-solid fa-cloud-arrow-down"></i>&nbsp; Download List
             </CSVLink>
           </Button>
-        </div>
-        <div className="col-md-5 col-sm-2 col-xs-2 mb-2">
-          <Button variant="info" className="text-white">
+        </Col>
+        <Col lg={3} md={3} sm={4} className="mb-2">
+          <Button
+            variant="info"
+            className="text-white"
+            onClick={() => setState({ scanner: true })}
+          >
             <i class="fa-light fa-qrcode"></i>&nbsp; Scan QR Code
           </Button>
-        </div>
-        <div className="col-md-4 col-sm-12">
+        </Col>
+        <Col lg={4} md={4} sm={12} className="text-right">
           <Form className="d-flex">
             <Form.Control
               type="search"
@@ -216,7 +279,7 @@ function DysRegListContainer() {
               <i class="fa-solid fa-magnifying-glass"></i> Search
             </Button>
           </Form>
-        </div>
+        </Col>
       </div>
 
       {/* <DataTable
@@ -240,7 +303,7 @@ function DysRegListContainer() {
           {dysSearchedRegistrations?.length > 0
             ? dysSearchedRegistrations?.map((registration) => {
                 return (
-                  <Tr key={registration?.ticket_id}>
+                  <Tr key={registration?.ticket_id} className="mb-2">
                     {DYS_COLUMNS(handleRowActions, false, session_id).map(
                       (column) => {
                         return (
@@ -354,6 +417,89 @@ function DysRegListContainer() {
                 <b>{new Date(viewPopup.registeredOn).toLocaleString()}</b>
               </li>
             </ul>
+          </div>
+        </div>
+      )}
+
+      {scanner && (
+        <div
+        className="popup-outer"
+        onClick={() => setState({ scanner: null })}
+      >
+           <div
+            className="popup-inner text-center m-0 p-0 " 
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <div style={{position: 'relative'}}>
+             {completed && <Card style={{
+                      position: "absolute", 
+                      zIndex: 999, 
+                      width: 300,
+                      transform: 'translate(16%, 15%)'
+                    }}>
+                  <Image src="/assets/images/completed.gif"   /> 
+
+                  <div style={{lineHeight: 0.5}}>
+                    <p>Name: {completed?.devoteeInfo?.[0]?.name}</p>
+                    <p>Email: {completed?.devoteeInfo?.[0]?.email}</p>
+                    <h6>Attendance marked successfully.</h6>
+                  </div>
+                </Card>}
+              <QrReader
+                ref={qrRef}
+                scanDelay={500}
+                onError={(err) => {
+                  alert(err);
+                }}
+                constraints={{
+                  facingMode: front? "user": "environment",
+                }}
+                onResult={(result, error) => {
+                  if (!!result) {
+                    if (scanner) {
+                      let parsedTicketData = JSON.parse(result.text);
+                      const devotee = dysRegistrations.find(el=> el.ticket_id === parsedTicketData?.ticketId);
+                      if(devotee) {
+                        console.log(devotee);
+                        setState(prev=> ({...prev, completed: devotee}));
+                        setTimeout(()=> {
+                          setState(prev=> ({...prev, completed: null}));
+                        }, 3000);
+                        markDysAttendance(
+                          parsedTicketData?.ticketId,
+                          session_id,
+                          true
+                        ).then((response) => { 
+                          const data = response.data;
+                          setDysRegistrations(data.dysList);
+                        });
+                      } else {
+                        alert("No data found");
+                      }
+                      // if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'present').length > 0) {
+                      //     alert("Devotee already present");
+                      // }  else if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'absent').length > 0) {
+                      //   // this.setState({qrScanner: false});
+                      //   this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
+                      // } else {
+                      //   alert("Ticket not found");
+                      // }
+                      // this.setState({searchText: parsedTicketData.ticketId});
+                      // this.onSearch({target: {value: parsedTicketData.ticketId}});
+                    }
+                  }
+                }}
+              />
+            </div>
+        
+            <Row>
+              <Col className="mb-2">
+                <Button variant="success" onClick={() => setState(prev=> ({...prev, front: !front }))}>Change Camera</Button>
+              </Col>
+            </Row>
+            <Button variant="danger" className="mb-3" onClick={() => setState({ scanner: null })}>Close</Button>
           </div>
         </div>
       )}
