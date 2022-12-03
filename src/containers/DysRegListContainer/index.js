@@ -33,12 +33,12 @@ function DysRegListContainer() {
 
   const qrRef = useRef();
 
-  const [{ editPopup, viewPopup, scanner, front, completed }, setState] =
+  const [{ editPopup, viewPopup, scanner, facingMode, completed }, setState] =
     useState({
       editPopup: null,
       viewPopup: null,
       scanner: false,
-      front: true,
+      facingMode: "environment",
       completed: false,
     });
 
@@ -155,45 +155,47 @@ function DysRegListContainer() {
     setSearchInput(value);
   };
 
-  const CameraComponent = useMemo(() => {
-    return <QrReader
-      ref={qrRef}
-      scanDelay={500}
-      onError={(err) => {
-        alert(err);
-      }}
-      constraints={{
-        facingMode: "front",
-      }}
-      onResult={(result, error) => {
-        if (!!result) {
-          if (scanner) {
-            let parsedTicketData = JSON.parse(result.text);
-            const devotee = dysRegistrations.find(
-              (el) => el.ticket_id === parsedTicketData?.ticketId
-            );
-            if (devotee) {
-              console.log(devotee);
-              setState((prev) => ({ ...prev, completed: devotee }));
-              setTimeout(() => {
-                setState((prev) => ({ ...prev, completed: null }));
-              }, 3000);
-              markDysAttendance(
-                parsedTicketData?.ticketId,
-                session_id,
-                true
-              ).then((response) => {
-                const data = response.data;
-                setDysRegistrations(data.dysList);
-              });
-            } else {
-              alert("No data found");
+  const CameraComponent = useMemo(() => { 
+    return (
+      <QrReader
+        ref={qrRef}
+        scanDelay={500}
+        onError={(err) => {
+          alert(err);
+        }}
+        constraints={{
+          facingMode,
+        }}
+        onResult={(result, error) => {
+          if (!!result) {
+            if (scanner) {
+              let parsedTicketData = JSON.parse(result.text);
+              const devotee = dysRegistrations.find(
+                (el) => el.ticket_id === parsedTicketData?.ticketId
+              );
+              if (devotee) {
+                console.log(devotee);
+                setState((prev) => ({ ...prev, completed: devotee }));
+                setTimeout(() => {
+                  setState((prev) => ({ ...prev, completed: null }));
+                }, 3000);
+                markDysAttendance(
+                  parsedTicketData?.ticketId,
+                  session_id,
+                  true
+                ).then((response) => {
+                  const data = response.data;
+                  setDysRegistrations(data.dysList);
+                });
+              } else {
+                alert("No data found");
+              }
             }
           }
-        }
-      }}
-    />;
-  }, [dysRegistrations, front, scanner, session_id]);
+        }}
+      />
+    );
+  }, [dysRegistrations, facingMode, scanner, session_id]);
 
   console.log({ session_id });
   if (!session_id)
@@ -507,9 +509,19 @@ function DysRegListContainer() {
               <Col className="mb-2">
                 <Button
                   variant="success"
-                  onClick={() =>
-                    setState((prev) => ({ ...prev, front: !prev.front }))
-                  }
+                  onClick={() => {
+                    const previous = facingMode;
+                    console.log(previous);
+                    setState((prev) => ({ ...prev, scanner: null ,facingMode: null }));
+                    setTimeout(() => {
+                      setState((prev) => ({
+                        ...prev,
+                        scanner: true,
+                        facingMode:
+                          previous === "front" ? "environment" : "front",
+                      }));
+                    }, 1000);
+                  }}
                 >
                   Change Camera
                 </Button>
