@@ -8,7 +8,15 @@ import {
 } from "../../services/UmangService";
 import { DYS_COLUMNS } from "./constants";
 import { CSVLink } from "react-csv";
-import { Form, Button, Container, Row, Col, Image, Card } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+  Card,
+} from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { Table, Tbody, Td, Th, Thead, Tr } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
@@ -25,13 +33,14 @@ function DysRegListContainer() {
 
   const qrRef = useRef();
 
-  const [{ editPopup, viewPopup, scanner, front, completed }, setState] = useState({
-    editPopup: null,
-    viewPopup: null,
-    scanner: false,
-    front: true,
-    completed: false,
-  });
+  const [{ editPopup, viewPopup, scanner, front, completed }, setState] =
+    useState({
+      editPopup: null,
+      viewPopup: null,
+      scanner: false,
+      front: true,
+      completed: false,
+    });
 
   const csvLink = useMemo(
     () => ({
@@ -145,6 +154,46 @@ function DysRegListContainer() {
     const value = e.target.value;
     setSearchInput(value);
   };
+
+  const CameraComponent = useMemo(() => {
+    return <QrReader
+      ref={qrRef}
+      scanDelay={500}
+      onError={(err) => {
+        alert(err);
+      }}
+      constraints={{
+        facingMode: front ? "front" : "environment",
+      }}
+      onResult={(result, error) => {
+        if (!!result) {
+          if (scanner) {
+            let parsedTicketData = JSON.parse(result.text);
+            const devotee = dysRegistrations.find(
+              (el) => el.ticket_id === parsedTicketData?.ticketId
+            );
+            if (devotee) {
+              console.log(devotee);
+              setState((prev) => ({ ...prev, completed: devotee }));
+              setTimeout(() => {
+                setState((prev) => ({ ...prev, completed: null }));
+              }, 3000);
+              markDysAttendance(
+                parsedTicketData?.ticketId,
+                session_id,
+                true
+              ).then((response) => {
+                const data = response.data;
+                setDysRegistrations(data.dysList);
+              });
+            } else {
+              alert("No data found");
+            }
+          }
+        }
+      }}
+    />;
+  }, [dysRegistrations, front, scanner, session_id]);
 
   console.log({ session_id });
   if (!session_id)
@@ -423,83 +472,56 @@ function DysRegListContainer() {
 
       {scanner && (
         <div
-        className="popup-outer"
-        onClick={() => setState({ scanner: null })}
-      >
-           <div
-            className="popup-inner text-center m-0 p-0 " 
+          className="popup-outer"
+          onClick={() => setState({ scanner: null })}
+        >
+          <div
+            className="popup-inner text-center m-0 p-0 "
             onClick={(e) => {
               e.stopPropagation();
             }}
           >
-            <div style={{position: 'relative'}}>
-             {completed && <Card style={{
-                      position: "absolute", 
-                      zIndex: 999, 
-                      width: 300,
-                      transform: 'translate(16%, 15%)'
-                    }}>
-                  <Image src="/assets/images/completed.gif"   /> 
+            <div style={{ position: "relative" }}>
+              {completed && (
+                <Card
+                  style={{
+                    position: "absolute",
+                    zIndex: 999,
+                    width: 300,
+                    transform: "translate(16%, 15%)",
+                  }}
+                >
+                  <Image src="/assets/images/completed.gif" />
 
-                  <div style={{lineHeight: 0.5}}>
+                  <div style={{ lineHeight: 0.5 }}>
                     <p>Name: {completed?.devoteeInfo?.[0]?.name}</p>
                     <p>Email: {completed?.devoteeInfo?.[0]?.email}</p>
                     <h6>Attendance marked successfully.</h6>
                   </div>
-                </Card>}
-              <QrReader
-                ref={qrRef}
-                scanDelay={500}
-                onError={(err) => {
-                  alert(err);
-                }}
-                constraints={{
-                  facingMode: front? "front": "environment",
-                }}
-                onResult={(result, error) => {
-                  if (!!result) {
-                    if (scanner) {
-                      let parsedTicketData = JSON.parse(result.text);
-                      const devotee = dysRegistrations.find(el=> el.ticket_id === parsedTicketData?.ticketId);
-                      if(devotee) {
-                        console.log(devotee);
-                        setState(prev=> ({...prev, completed: devotee}));
-                        setTimeout(()=> {
-                          setState(prev=> ({...prev, completed: null}));
-                        }, 3000);
-                        markDysAttendance(
-                          parsedTicketData?.ticketId,
-                          session_id,
-                          true
-                        ).then((response) => { 
-                          const data = response.data;
-                          setDysRegistrations(data.dysList);
-                        });
-                      } else {
-                        alert("No data found");
-                      }
-                      // if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'present').length > 0) {
-                      //     alert("Devotee already present");
-                      // }  else if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'absent').length > 0) {
-                      //   // this.setState({qrScanner: false});
-                      //   this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
-                      // } else {
-                      //   alert("Ticket not found");
-                      // }
-                      // this.setState({searchText: parsedTicketData.ticketId});
-                      // this.onSearch({target: {value: parsedTicketData.ticketId}});
-                    }
-                  }
-                }}
-              />
+                </Card>
+              )}
+              {CameraComponent}
             </div>
-        
+
             <Row>
               <Col className="mb-2">
-                <Button variant="success" onClick={() => setState(prev=> ({...prev, front: !prev.front }))}>Change Camera</Button>
+                <Button
+                  variant="success"
+                  onClick={() =>
+                    setState((prev) => ({ ...prev, front: !prev.front }))
+                  }
+                >
+                  Change Camera
+                </Button>
               </Col>
             </Row>
-            <Button variant="danger" className="mb-3" onClick={() => setState({ scanner: null })}>Close</Button>
+            <Button
+              variant="danger"
+              className="mb-3"
+              onClick={() => setState({ scanner: null })}
+            >
+              Close
+            </Button>
           </div>
         </div>
       )}
