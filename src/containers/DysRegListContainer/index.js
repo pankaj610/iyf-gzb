@@ -454,7 +454,7 @@ function DysRegListContainer() {
                   alert(err);
                 }}
                 constraints={{
-                  facingMode: front? "front": "rear",
+                  facingMode: front? "front": "user",
                 }}
                 onResult={(result, error) => {
                   if (!!result) {
@@ -496,7 +496,7 @@ function DysRegListContainer() {
         
             <Row>
               <Col className="mb-2">
-                <Button variant="success" onClick={() => setState(prev=> ({...prev, front: !front }))}>Change Camera</Button>
+                <Button variant="success" onClick={() => setState(prev=> ({...prev, front: !prev.front }))}>Change Camera</Button>
               </Col>
             </Row>
             <Button variant="danger" className="mb-3" onClick={() => setState({ scanner: null })}>Close</Button>
