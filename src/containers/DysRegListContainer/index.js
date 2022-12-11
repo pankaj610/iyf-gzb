@@ -287,7 +287,7 @@ function DysRegListContainer() {
     <div className="reg-list-container">
       <h1 className="text-center">DYS Devotees</h1>
       <div className="row mb-3 d-flex">
-        <Col lg={2} md={2} sm={3} xs={4} className="mb-2">
+        <Col lg={2} md={2} sm={6} xs={6} className="mb-2">
           <Button
             variant="warning"
             onClick={() => {
@@ -298,7 +298,7 @@ function DysRegListContainer() {
           </Button>
         </Col>
         <Col lg={3} md={3} sm={5} xs={6}>
-          <Button variant="success">
+          <Button variant="success" className="float-end float-sm-start">
             <CSVLink
               {...csvLink}
               style={{ color: "white", textDecoration: "none" }}

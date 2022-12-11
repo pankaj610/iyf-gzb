@@ -1,0 +1,29 @@
+.h-vh100 {
+  height: 100vh;
+}
+.form-box {
+  width: 380px;
+  height: 450px;
+  background-color: black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  opacity: 0.5;
+  border-radius: 2%;
+}
+.social {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+.social i {
+  font-size: 19px;
+  margin-right: 8px;
+}
+
+.social i:hover {
+  color: red;
+  cursor: pointer;
+}
