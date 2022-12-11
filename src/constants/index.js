@@ -1,5 +1,6 @@
 export const ROUTE = {
     HOME: '/',
+    LOGIN: '/login',
     BLOG: '/blog/:slug',
     CONTACT_US: '/contact-us',
     WISDOM_BATCH: '/wisdom-batch',

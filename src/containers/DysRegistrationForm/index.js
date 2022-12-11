@@ -38,8 +38,8 @@ const DysRegistrationForm = () => {
         const data=response.data; 
         if(data?.message) {
           alert(data.message);
-        } else {
-          alert("DYS is registered successfully. Ticket Id: ", data?.ticket?.ticket_id);
+        } else { 
+          alert("DYS is registered successfully. Ticket Id: "+ data.ticket?.ticket_id);
         }
       })
     }

@@ -202,12 +202,11 @@ function DysRegListContainer() {
     return (
       <Container
         className="container text-center"
-        style={{ paddingTop: "30vh" }}
+        style={{ paddingTop: "10vh" }}
         fluid
       >
         <h1 className="text-center">Please select DYS session</h1>
-        <Row>
-          <Col>
+        <Row className="justify-content-center px-3 mx-3"> 
             <Button
               variant="outline-success"
               className="m-3"
@@ -267,8 +266,7 @@ function DysRegListContainer() {
               }}
             >
               Session 6
-            </Button>
-          </Col>
+            </Button> 
         </Row>
         <Button
           variant="info"
@@ -287,7 +285,7 @@ function DysRegListContainer() {
     <div className="reg-list-container">
       <h1 className="text-center">DYS Devotees</h1>
       <div className="row mb-3 d-flex">
-        <Col lg={2} md={2} sm={3} xs={4} className="mb-2">
+        <Col lg={2} md={2} sm={6} xs={6} className="mb-2">
           <Button
             variant="warning"
             onClick={() => {
@@ -298,7 +296,7 @@ function DysRegListContainer() {
           </Button>
         </Col>
         <Col lg={3} md={3} sm={5} xs={6}>
-          <Button variant="success">
+          <Button variant="success" className="float-end float-sm-start">
             <CSVLink
               {...csvLink}
               style={{ color: "white", textDecoration: "none" }}
