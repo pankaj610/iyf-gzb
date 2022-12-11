@@ -301,7 +301,7 @@ function DysRegListContainer() {
               {...csvLink}
               style={{ color: "white", textDecoration: "none" }}
             >
-              <i class="fa-solid fa-cloud-arrow-down"></i>&nbsp; Download List
+              <i class="fa-solid fa-cloud-arrow-down"></i>&nbsp; Download
             </CSVLink>
           </Button>
         </Col>

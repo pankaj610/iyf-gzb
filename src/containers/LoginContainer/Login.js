@@ -4,9 +4,9 @@ import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 
 import "./Login.scss";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { ROUTE } from "../../constants";
-import { setOrLoadUserData, setTokenOrLoad } from "../../services/UmangService";
+import { setOrLoadUserData } from "../../services/UmangService";
 import { setUserDataAtom } from "../../App";
 import { useAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
