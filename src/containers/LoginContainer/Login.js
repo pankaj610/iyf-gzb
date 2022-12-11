@@ -4,25 +4,36 @@ import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 
 import "./Login.scss";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { ROUTE } from "../../constants";
 import { setOrLoadUserData, setTokenOrLoad } from "../../services/UmangService";
 import { setUserDataAtom } from "../../App";
-import { useAtom } from 'jotai';
-const clientId =
+import { useAtom } from "jotai";
+import { useSearchParams } from "react-router-dom";
+export const clientId =
   "376495499824-ve654phdegv5hq7ri5kg9imnphcti4j5.apps.googleusercontent.com";
 
 function LoginScreen() {
-    const navigate = useNavigate();
-    const [, setUserData] = useAtom(setUserDataAtom);
+
+  const navigate = useNavigate();
+  const [, setUserData] = useAtom(setUserDataAtom);
+
+  const [searchParams] = useSearchParams(); 
+  const redirectUrl = searchParams?.get("redirect");
+
+
   const responseGoogle = (response) => {
-    if(!response?.tokenId) {
-        alert("There is some error while logging in.");
-        return;
-    } 
+    if (!response?.tokenId) {
+      alert("There is some error while logging in.");
+      return;
+    }
     setOrLoadUserData(response);
     setUserData(response);
-    navigate(ROUTE.DYS);
+    if(redirectUrl) {
+      window.location.href = redirectUrl;
+    } else {
+      navigate(ROUTE.DYS);
+    }
   };
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import {
   Navigate,
   Route,
   Routes,
-  useNavigate,
+  useNavigate, 
 } from "react-router-dom";
 import "./App.scss";
 import ContactContainer from "./containers/ContactContainer";
@@ -19,13 +19,15 @@ import DysRegistrationForm from "./containers/DysRegistrationForm";
 import DysRegListContainer from "./containers/DysRegListContainer";
 import LoginScreen from "./containers/LoginContainer/Login";
 import AppNavbar from "./components/AppNavbar";
-import {Provider, atom, useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { useEffect } from "react";
+ 
 
 export const ProtectedRoute = ({ children }) => {
+  const loc = window.location.href;
   const data = localStorage.getItem("user_data");
   if (!data) {
-    return <Navigate to="/login" />;
+    return <Navigate to={`/login?redirect=${loc}`} />;
   }
   return <div><AppNavbar/>{children}</div>;
 };
@@ -43,8 +45,10 @@ function App() {
 
 
   const loadUserData = ()=> {
-    const data = JSON.parse(localStorage.getItem('user_data'));  
-    setUserData(data);
+    const data = JSON.parse(localStorage.getItem('user_data'));
+    if(data) {
+      setUserData(data);
+    }
   }
 
 
@@ -66,12 +70,12 @@ function App() {
             <Route path={ROUTE.UTSAH} element={<UmangContainer />} exact />
             <Route
               path={ROUTE.UTSAH_VOLUNTEER}
-              element={<UmangVolunteerContainer />}
+              element={<ProtectedRoute><UmangVolunteerContainer /></ProtectedRoute>}
               exact
             />
             <Route
               path={ROUTE.UTSAH_LIST}
-              element={<UmangRegListContainer />}
+              element={<ProtectedRoute><UmangRegListContainer /></ProtectedRoute>}
               exact
             />
             <Route

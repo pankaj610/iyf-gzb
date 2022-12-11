@@ -202,12 +202,11 @@ function DysRegListContainer() {
     return (
       <Container
         className="container text-center"
-        style={{ paddingTop: "30vh" }}
+        style={{ paddingTop: "10vh" }}
         fluid
       >
         <h1 className="text-center">Please select DYS session</h1>
-        <Row>
-          <Col>
+        <Row className="justify-content-center px-3 mx-3"> 
             <Button
               variant="outline-success"
               className="m-3"
@@ -267,8 +266,7 @@ function DysRegListContainer() {
               }}
             >
               Session 6
-            </Button>
-          </Col>
+            </Button> 
         </Row>
         <Button
           variant="info"
