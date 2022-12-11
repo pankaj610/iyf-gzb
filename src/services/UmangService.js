@@ -1,19 +1,13 @@
 import axios from "axios";
 import { 
   FETCH_VOLUNTEER_LIST, 
-} from "../constants";
-import { atom } from "jotai";
-
-import {
-  DYS_LIST
-} from '../constants'
-import { userDataAtom } from "../App";
+} from "../constants"; 
 
 // const BASE_URL = 'https://iyfapi.herokuapp.com';
 // const BASE_URL = "http://localhost:59635";
 // const BASE_URL = "https://arcane-fjord-22981.herokuapp.com";
-// const BASE_URL = "https://iyfghaziabad.com/api/devotee";
-const BASE_URL = "http://localhost:8000/api/devotee";
+const BASE_URL = "https://iyfghaziabad.com/api/devotee";
+// const BASE_URL = "http://localhost:8000/api/devotee";
  
  
 
