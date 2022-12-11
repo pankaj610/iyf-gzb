@@ -11,7 +11,7 @@ import { setUserDataAtom } from "../../App";
 import { useAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
 export const clientId =
-  "376495499824-ve654phdegv5hq7ri5kg9imnphcti4j5.apps.googleusercontent.com";
+  "276504402857-9q9ttkm752t0440upd22eevlaglsj9r8.apps.googleusercontent.com";
 
 function LoginScreen() {
 
