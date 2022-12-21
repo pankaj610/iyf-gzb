@@ -1,14 +1,14 @@
-import React  from 'react'
+import React from 'react'
 import {  Container, Image, Nav, Navbar,  Offcanvas } from 'react-bootstrap'
 import { useNavigate } from 'react-router';
 import { useAtom } from 'jotai';
-import { userDataAtom } from '../App';
+import { userDataAtom, whatCanISeeAtom } from '../App';
 import { GoogleLogout } from 'react-google-login';
 import { clientId } from '../containers/LoginContainer/Login';
-import { Link } from 'react-router-dom';
 
 function AppNavbar(params) {
-    const [userData, setUserData] = useAtom(userDataAtom);
+    const [userData] = useAtom(userDataAtom);
+    const [iCanSee] = useAtom(whatCanISeeAtom);
 
     const navigate = useNavigate();
     const logout = ()=> {
@@ -24,10 +24,14 @@ function AppNavbar(params) {
                 <Navbar.Brand href="#"><Image src={userData?.profileObj?.imageUrl} height="30" width="30"/></Navbar.Brand>
                 <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="me-auto">
+                  {!!iCanSee.find((el) => el === "utsah") && (<>
                     <Nav.Link href="/utsah/volunteer">Utsah</Nav.Link>
                     <Nav.Link href="/utsah/list">Utsah List</Nav.Link>
+                  </>)}
+                  {!!iCanSee.find((el) => el === "dys") && (<>
                     <Nav.Link href="/dys">DYS</Nav.Link>
                     <Nav.Link href="/dys/list">DYS List</Nav.Link>
+                  </>)}
                   </Nav>
                    
                   <Offcanvas.Body>
