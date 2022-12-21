@@ -1,20 +1,19 @@
-import React, { useEffect } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import React, { useEffect } from "react"; 
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 
 import "./Login.scss";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { ROUTE } from "../../constants";
-import { setOrLoadUserData, setTokenOrLoad } from "../../services/UmangService";
-import { setUserDataAtom } from "../../App";
+import { setOrLoadUserData, whatCanISee } from "../../services/UmangService";
+import { setUserDataAtom, whatCanISeeAtom } from "../../App";
 import { useAtom } from "jotai";
 import { useSearchParams } from "react-router-dom";
 export const clientId =
   "276504402857-9q9ttkm752t0440upd22eevlaglsj9r8.apps.googleusercontent.com";
 
 function LoginScreen() {
-
+  const [, setICanSee] = useAtom(whatCanISeeAtom);
   const navigate = useNavigate();
   const [, setUserData] = useAtom(setUserDataAtom);
 
@@ -29,10 +28,14 @@ function LoginScreen() {
     }
     setOrLoadUserData(response);
     setUserData(response);
+    whatCanISee().then((res)=> {
+      const iCanSee = res.data.iCanSee;
+      setICanSee(iCanSee);
+    })
     if(redirectUrl) {
       window.location.href = redirectUrl;
     } else {
-      navigate(ROUTE.DYS);
+      navigate(ROUTE.UTSAH_VOLUNTEER);
     }
   };
 

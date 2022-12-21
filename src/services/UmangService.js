@@ -23,7 +23,7 @@ export const getToken = () => {
 }
 
 export const createNewRegistration = (userDetails) => {
-  return axios.post(BASE_URL + "/create", userDetails, {
+  return axios.post(BASE_URL + "/registerForUtsah", userDetails, {
     headers: {
       Authorization: `Bearer ${getToken()}`
     }
@@ -54,14 +54,6 @@ export const fetchVolunteerList = () => {
   });
 };
 
-export const fetchDysRegList = () =>{ 
-  return axios.get(BASE_URL + '/list', {
-    headers: {
-      Authorization: `Bearer ${getToken()}`
-    }
-  });
-}
-
 export const fetchDysRegistrations = () => {
   console.log({GOOGLE_TOKEN: getToken()});
   return axios.get(BASE_URL + "/dysList", {
@@ -72,7 +64,7 @@ export const fetchDysRegistrations = () => {
 }
 
 export const fetchAllRegistrations = () => {
-  return axios.get(BASE_URL + "/list", {
+  return axios.get(BASE_URL + "/utsahList", {
     headers: {
       Authorization: `Bearer ${getToken()}`
     }
@@ -81,7 +73,7 @@ export const fetchAllRegistrations = () => {
 
 
 export const markAttendance = (id, present) => {
-  return axios.post(BASE_URL + "/attendance", {
+  return axios.post(BASE_URL + "/utsahAttendance", {
     ticket_id: id,
     present: present,
   }, {
@@ -102,3 +94,13 @@ export const markDysAttendance = (ticketId, sessionId, present) => {
     }
   })
 }
+
+
+export const whatCanISee = () => {
+  return axios.get(BASE_URL + "/whatCanISee", {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  });
+};
+

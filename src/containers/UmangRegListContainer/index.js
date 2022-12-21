@@ -26,20 +26,31 @@ class UmangRegListContainer extends Component {
   componentDidMount() {
     fetchAllRegistrations()
       .then((res) => {
+        if(res?.data?.message) {
+          alert(res.data.message);
+          return;
+        }
         this.setState({
-          data: res.data.map((reg) => ({
-            ...reg,
-            registeredOn: new Date(reg.registeredOn).toDateString(),
-            registeredBy: reg.tickets[0]?.registeredBy,
-            remarks: reg.tickets[0]?.remarks,
-            uuid: reg.tickets[0]?.ticket_id,
-            attendance: reg.tickets[0]?.present ? 'present' : 'absent'
-          })),
+          data: res.data.utsahList.map(this.mapUtsahRegistrations),
         });
       })
       .catch((err) => {
         alert("Error:", err.message);
       });
+  }
+
+  mapUtsahRegistrations = (reg) => {
+    return ({
+          _id: reg.devoteeInfo?.[0]?._id,
+          name: reg.devoteeInfo?.[0]?.name,
+          email: reg.devoteeInfo?.[0]?.email,
+          contact: reg.devoteeInfo?.[0]?.contact,
+          registeredOn: new Date(reg.registeredOn).toDateString(),
+          registeredBy: reg.registeredBy,
+          remarks: reg.remarks,
+          uuid: reg.ticket_id,
+          attendance: reg.present ? 'present' : 'absent'
+    })
   }
 
   convertArrayOfObjectsToCSV = (array) => {
@@ -116,14 +127,7 @@ class UmangRegListContainer extends Component {
               alert(`Hare Krishna ${name} prbhu, Your attendance is marked successfully.`);
             }
             this.setState({
-              data: res.data.map((reg) => ({
-                ...reg,
-                registeredOn: new Date(reg.registeredOn).toDateString(),
-                registeredBy: reg.tickets[0]?.registeredBy,
-                remarks: reg.tickets[0]?.remarks,
-                uuid: reg.tickets[0]?.ticket_id,
-                attendance: reg.tickets[0]?.present ? 'present' : 'absent'
-              })),
+              data: res.data.utsahList.map(this.mapUtsahRegistrations),
               disabled: false,
             }, ()=> {
               this.onSearch({target: {value: this.state.searchText}});

@@ -120,11 +120,12 @@ class Input extends React.Component {
                             className={`input-container ${className ? className : ''}`}
                             style={{ display: "inline-block", width: "fit-content" }}
                             name={name}
+                            id={name}
                             checked={value}
                             onChange={(e) => setValue(name, e.target.checked)}
                             type={type}
                         />
-                        <label>{placeholder}</label>
+                        <label for={name}>{placeholder}</label>
                     </div>
                 )}
                 {(type === 'file') && (

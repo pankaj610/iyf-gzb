@@ -1,142 +1,45 @@
-import React from "react";
+import React, { useReducer } from "react";
 import Input from "../../ui/Input";
 import RoundBtn from "../../ui/RoundBtn";
 import { createNewRegistration } from "../../services/UmangService";
 import COLORS from "../../constants/colors";
-import "./style.scss";
-import { transformName } from "../../utils";
+import "./style.scss"; 
+import { useAtom } from "jotai";
+import { userDataAtom } from "../../App";
 
 
-class UmangVolunteerContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      email: "",
-      contact: "",
-      gender: "",
-      location: "",
-      remarks: "",
-      paid: true,
-      registeredBy: "0",
-      volunteers: [
-          // "Aakarsh Saxena",
-          // "Abhishek Johri",
-          // "Abhishek Kumar",
-          // "Abhishek Tiwari",
-          // "Aditya Munje",
-          // "Adbhut Narsimha Das",
-          // "Akshay Kumar Gupta",
-          // "Akshit",
-          // "Alok Mandal",
-          // "Aman Verma",
-          // "Anand Kumar",
-          // "Angad Kumar",
-          // "Amanda Madhu Mangal Das",
-          "Ankur Sharma",
-          "Anmol Gupta",
-          // "Anuj Ruhela",
-          // "Anuj Saxena",
-          // "Anupam Mishra",
-          // "Anurag Mishra",
-          // "Aryaman Bhatnagar",
-          // "Ashish Chaudhary",
-          // "Ashish Kushwaha",
-          // "Ashish Nath",
-          // "Ashish Saxena",
-          // "Ashish Singh",
-          // "Ashutosh Jaiswal",
-          // "Aviral Chaudhary",
-          // "Chaitanya Tirtha Das",
-          // "Damodar Lila Das",
-          // "Deep Subhanjay",
-          // "Dev Kumar",
-          // "Dwarikanath Hrishikesh Das",
-          // "Gaurav Rajput",
-          "Hanu Shukla",
-          // "Harsh Singhal",
-          // "Harshdeep Singh",
-          // "Harshit Garg",
-          // "Harshit Sharma",
-          // "Himanshu Hito",
-          // "Hrishabh Sisodiya",
-          // "Ishan Sharma",
-          // "Jitendra Nickey",
-          "Kanu Mohan Das",
-          // "Krishan Gopal",
-          // "Krishnanand Sharma",
-          // "Kshitij Sharma",
-          // "Kunal Bisht",
-          // "Lucky Garg",
-          // "Manish Choudhary",
-          // "Manu Singh",
-          // "Mayank Dixit",
-          // "Mohit Kushwaha",
-          // "Mohit Rajput",
-          // "Mohit Yadav",
-          // "Mukul Agnihotri",
-          // "Mukul Kaushik",
-          // "Mukul Verma",
-          // "Narayan",
-          // "Omprakash Tiwari",
-          // "Pankaj Gupta",
-          "Pankaj Verma",
-          // "Piyush Goswami",
-          // "Prajwal Singh",
-          // "Prashant Sarvabhauma Das",
-          // "Purshottam Singh",
-          // "Rajan Pandey",
-          // "Rajan Sharma",
-          "Rajat Sharma",
-          // "Raghav Kripa Das",
-          // "Rishabh Pal",
-          // "Ritesh Tiwari",
-          // "Ritik Dagar",
-          // "Ritik Rajput",
-          // "Rohit Kumar",
-          // "Sachin Shakya",
-          // "Sarva Mangal Gaur Das",
-          // "Shankey Bhati",
-          // "Shashi Kant",
-          // "Shivakant Awasthi",
-          // "Shivam Gupta",
-          // "Shivam Singh",
-          // "Shreshth Garg",
-          // "Shreyash Tiwari",
-          "Shubham Tiwari Das",
-          // "Sonu Goswami",
-          // "Seva Priya Vaisnava Das",
-          // "Sujal Mahajan",
-          // "Sumit Pal",
-          // "Suraj Maurya",
-          // "Tanishq Srivastava",
-          // "Tanuj Chauhan",
-          // "Tarun Anand",
-          // "Tushar Shukla",
-          // "Vaibhav Gupta",
-          // "Vibhor Sinha",
-          // "Vikram Singh",
-          // "Vishal Singh",
-          // "Vishal Thakur"
-          
-      ],
-    };
-  }
+const UmangVolunteerContainer = ()=> {
+   const [state, setState] = useReducer((prevState, nextState)=> ({...prevState, ...nextState}), {
+    name: "",
+    email: "",
+    contact: "",
+    gender: "",
+    location: "",
+    remarks: "",
+    paid: true,
+    registeredBy: "0",
+    isBgIncluded: false,
+  });
 
-  setFormData = (name, value) => {
-    this.setState({
+  const [userData] = useAtom(userDataAtom);
+
+  const setFormData = (name, value) => {
+    setState({
       [name]: value,
     });
   };
-  register = () => {
-    const { name, email, contact, location, gender, registeredBy, paid, remarks } =
-      this.state;
+  
+  const register = () => {
+    const { name, email, contact, location, gender,  paid, remarks } =
+      state;
     // console.log(name, email, contact, gender, location, registeredBy, paid);
-    if (name && email && contact && location && gender && registeredBy !== "0") {
+    if (name && email && contact && location && gender ) {
       //   console.log(name, email, contact, gender, location, registeredBy, paid);
-      this.setState({
+      setState({
         disableBtn: true
       });
+      console.log(userData);
+      const registeredBy =  `${userData?.profileObj?.name}` ;
       createNewRegistration({
         name,
         email,
@@ -148,7 +51,11 @@ class UmangVolunteerContainer extends React.Component {
         remarks,
       })
         .then((res) => {
-          this.setState({
+          if(res.data.message) {
+            alert(res.data.message);
+            return;
+          }
+          setState({
             name: "",
             email: "",
             contact: "",
@@ -161,47 +68,47 @@ class UmangVolunteerContainer extends React.Component {
           alert(
             `Registration successfully done. Ticket ID is ${res.data?.ticket?.ticket_id}.`
           );
-          this.setState({
+          setState({
             disableBtn: false
           });
         })
         .catch((e) => {
           alert("Error:", JSON.stringify(e));
         });
-        this.setState({
+        setState({
           disableBtn: false
         });
     } else {
       alert("Please fill details");
     }
   };
-
-  render() {
+ 
     const {
       name,
       email,
       contact,
       location,
-      registeredBy,
-      volunteers,
+      isBgIncluded,
+      // registeredBy,
+      // volunteers,
       gender,
       remarks,
       disableBtn,
-    } = this.state;
+    } = state;
     return (
       <div className="umang-container">
         <h1>UTSAH REGISTRATION</h1>
         <div className="form">
           <Input
             placeholder={"Name"}
-            setValue={this.setFormData}
+            setValue={setFormData}
             value={name}
             name="name"
             required
           />
           <Input
             placeholder={"Contact"}
-            setValue={this.setFormData}
+            setValue={setFormData}
             value={contact}
             name="contact"
             type="number"
@@ -210,7 +117,7 @@ class UmangVolunteerContainer extends React.Component {
           />
           <Input
             placeholder={"Email"}
-            setValue={this.setFormData}
+            setValue={setFormData}
             value={email}
             name="email"
             type="email"
@@ -218,7 +125,7 @@ class UmangVolunteerContainer extends React.Component {
           />
           <Input
             placeholder={"Gender"}
-            setValue={this.setFormData}
+            setValue={setFormData}
             value={gender}
             name="gender"
             type="select"
@@ -230,21 +137,21 @@ class UmangVolunteerContainer extends React.Component {
           />
           <Input
             placeholder={"Location"}
-            setValue={this.setFormData}
+            setValue={setFormData}
             value={location}
             name="location"
             required
           />
-          {/* <Input
-            placeholder={"Paid"}
-            setValue={this.setFormData}
-            value={paid}
-            name="paid"
-            type="checkbox"
-          /> */}
           <Input
+            placeholder={"Is Bhagawad Geeta Included"}
+            setValue={setFormData}
+            value={isBgIncluded}
+            name="isBgIncluded"
+            type="checkbox"
+          />
+          {/* <Input
             placeholder={"Registered by"}
-            setValue={this.setFormData}
+            setValue={setFormData}
             value={registeredBy}
             name="registeredBy"
             type="select"
@@ -254,16 +161,16 @@ class UmangVolunteerContainer extends React.Component {
             }))}
             className="full input"
             required
-          />
+          /> */}
           <Input
             placeholder={"Remarks"}
-            setValue={this.setFormData}
+            setValue={setFormData}
             value={remarks}
             name="remarks"
           />
           <RoundBtn
             className="btn selector-btn"
-            onClick={this.register}
+            onClick={register}
             outlineColor={COLORS.YELLOW}
             textColor={COLORS.WHITE}
             bgColor={COLORS.YELLOW}
@@ -282,7 +189,7 @@ class UmangVolunteerContainer extends React.Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 export default UmangVolunteerContainer;
