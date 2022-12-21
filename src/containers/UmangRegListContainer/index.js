@@ -6,8 +6,8 @@ import {
   updateRegistration,
 } from "../../services/UmangService";
 import { COLUMNS } from "./constants";
-import "./style.scss"; 
-import { QrReader } from 'react-qr-reader';
+import "./style.scss";
+import { QrReader } from "react-qr-reader";
 
 class UmangRegListContainer extends Component {
   constructor(props) {
@@ -20,13 +20,13 @@ class UmangRegListContainer extends Component {
       viewPopup: null,
       showDialog: true,
       processing: true,
-      qrScanner: false
+      qrScanner: false,
     };
   }
   componentDidMount() {
     fetchAllRegistrations()
       .then((res) => {
-        if(res?.data?.message) {
+        if (res?.data?.message) {
           alert(res.data.message);
           return;
         }
@@ -40,18 +40,19 @@ class UmangRegListContainer extends Component {
   }
 
   mapUtsahRegistrations = (reg) => {
-    return ({
-          _id: reg.devoteeInfo?.[0]?._id,
-          name: reg.devoteeInfo?.[0]?.name,
-          email: reg.devoteeInfo?.[0]?.email,
-          contact: reg.devoteeInfo?.[0]?.contact,
-          registeredOn: new Date(reg.registeredOn).toDateString(),
-          registeredBy: reg.registeredBy,
-          remarks: reg.remarks,
-          uuid: reg.ticket_id,
-          attendance: reg.present ? 'present' : 'absent'
-    })
-  }
+    return {
+      _id: reg.devoteeInfo?.[0]?._id,
+      name: reg.devoteeInfo?.[0]?.name,
+      email: reg.devoteeInfo?.[0]?.email,
+      contact: reg.devoteeInfo?.[0]?.contact,
+      registeredOn: new Date(reg.registeredOn).toDateString(),
+      registeredBy: reg.registeredBy,
+      isBgIncluded: reg.isBgIncluded,
+      remarks: reg.remarks,
+      uuid: reg.ticket_id,
+      attendance: reg.present ? "present" : "absent",
+    };
+  };
 
   convertArrayOfObjectsToCSV = (array) => {
     let result;
@@ -107,7 +108,7 @@ class UmangRegListContainer extends Component {
     const value = e.target.value;
     const lowered = value && value.toLowerCase();
     this.setState({
-      filteredData: data.filter((participant) => { 
+      filteredData: data.filter((participant) => {
         return (
           participant.uuid?.toLowerCase().includes(lowered) ||
           participant.name?.toLowerCase().includes(lowered) ||
@@ -122,21 +123,26 @@ class UmangRegListContainer extends Component {
 
   handleMarkAttendance(ticketId, isPresent, name = null) {
     markAttendance(ticketId, isPresent)
-          .then((res) => {
-            if(name) {
-              alert(`Hare Krishna ${name} prbhu, Your attendance is marked successfully.`);
-            }
-            this.setState({
-              data: res.data.utsahList.map(this.mapUtsahRegistrations),
-              disabled: false,
-            }, ()=> {
-              this.onSearch({target: {value: this.state.searchText}});
-            });
-          })
-          .catch((err) => {
-            this.setState({ disabled: false });
-            alert(err?.response?.data?.message || err.message);
-          });
+      .then((res) => {
+        if (name) {
+          alert(
+            `Hare Krishna ${name} prbhu, Your attendance is marked successfully.`
+          );
+        }
+        this.setState(
+          {
+            data: res.data.utsahList.map(this.mapUtsahRegistrations),
+            disabled: false,
+          },
+          () => {
+            this.onSearch({ target: { value: this.state.searchText } });
+          }
+        );
+      })
+      .catch((err) => {
+        this.setState({ disabled: false });
+        alert(err?.response?.data?.message || err.message);
+      });
   }
 
   handleButtonClick = (type, row) => {
@@ -151,7 +157,10 @@ class UmangRegListContainer extends Component {
       }
       case "attend": {
         this.setState({ disabled: true });
-        this.handleMarkAttendance(row.uuid, row.attendance === "absent" ? true : false);
+        this.handleMarkAttendance(
+          row.uuid,
+          row.attendance === "absent" ? true : false
+        );
       }
       default:
     }
@@ -159,11 +168,7 @@ class UmangRegListContainer extends Component {
 
   sendUpdateRequest = () => {
     const {
-      editPopup: {
-        _id,
-        email,
-        contact,
-      },
+      editPopup: { _id, email, contact },
     } = this.state;
     updateRegistration({
       _id,
@@ -197,54 +202,84 @@ class UmangRegListContainer extends Component {
   render() {
     const { data, searchText, filteredData, editPopup, viewPopup, disabled } =
       this.state;
-      const isMobile = window.screen.width <= 600;
-      const width = isMobile ? window.screen.width - 20 : window.screen.width/4;
-      console.log(width);
-    return (<div className="reg-list-container">
-        <div style={{ width: width+"px", heigth: width+"px", alignSelf: "center" }}>
-          {this.state.qrScanner ? <QrReader
-                ref={(ref)=> this.qrRef = ref}
-                scanDelay={500}
-                onError={(err)=> {alert(err)}}
-                constraints={{
-                  facingMode: 'environment'
+    const isMobile = window.screen.width <= 600;
+    const width = isMobile ? window.screen.width - 20 : window.screen.width / 4;
+    console.log(width);
+    return (
+      <div className="reg-list-container">
+        <div
+          style={{
+            width: width + "px",
+            heigth: width + "px",
+            alignSelf: "center",
+          }}
+        >
+          {this.state.qrScanner ? (
+            <QrReader
+              ref={(ref) => (this.qrRef = ref)}
+              scanDelay={500}
+              onError={(err) => {
+                alert(err);
               }}
-                onResult={(result, error) => {
-                  if (!!result) {  
-                    if(this.state.qrScanner) {
-                      let parsedTicketData = JSON.parse(result.text);
-                      if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'present').length > 0) {
-                          alert("Devotee already present");
-                      }  else if(this.state.data.filter(el=> el.uuid === parsedTicketData.ticketId && el.attendance === 'absent').length > 0) {
-                        // this.setState({qrScanner: false});
-                        this.handleMarkAttendance(parsedTicketData.ticketId, true, parsedTicketData.name);
-                      } else {
-                        alert("Ticket not found");
-                      }
-                      this.setState({searchText: parsedTicketData.ticketId});
-                      this.onSearch({target: {value: parsedTicketData.ticketId}});
+              constraints={{
+                facingMode: "environment",
+              }}
+              onResult={(result, error) => {
+                if (!!result) {
+                  if (this.state.qrScanner) {
+                    let parsedTicketData = JSON.parse(result.text);
+                    if (
+                      this.state.data.filter(
+                        (el) =>
+                          el.uuid === parsedTicketData.ticketId &&
+                          el.attendance === "present"
+                      ).length > 0
+                    ) {
+                      alert("Devotee already present");
+                    } else if (
+                      this.state.data.filter(
+                        (el) =>
+                          el.uuid === parsedTicketData.ticketId &&
+                          el.attendance === "absent"
+                      ).length > 0
+                    ) {
+                      // this.setState({qrScanner: false});
+                      this.handleMarkAttendance(
+                        parsedTicketData.ticketId,
+                        true,
+                        parsedTicketData.name
+                      );
+                    } else {
+                      alert("Ticket not found");
                     }
+                    this.setState({ searchText: parsedTicketData.ticketId });
+                    this.onSearch({
+                      target: { value: parsedTicketData.ticketId },
+                    });
                   }
-                }} 
-                
-              />: null}
+                }
+              }}
+            />
+          ) : null}
         </div>
-        <div className="header-bar"> 
+        <div className="header-bar">
           <a
             ref={(ref) => {
               this.exportRef = ref;
             }}
-            onClick={() => this.downloadCSV(data)} 
+            onClick={() => this.downloadCSV(data)}
           >
             <button>Export to CSV</button>
           </a>
 
-            
           <div>
-            
-              <button onClick={()=> {
-                this.setState({qrScanner: true});
-              }}>Show Qr Scanner</button>
+            <button
+              onClick={() => {
+                this.setState({ qrScanner: true });
+              }}
+            >
+              Show Qr Scanner
+            </button>
           </div>
           <input
             autoComplete="off"
@@ -257,7 +292,11 @@ class UmangRegListContainer extends Component {
           />
         </div>
         <DataTable
-          title={`All UTSAH Registrations | Total (${this.state.data?.length}) | Present(${this.state.data?.filter(el=> el.attendance === 'present').length})`}
+          title={`All UTSAH Registrations | Total (${
+            this.state.data?.length
+          }) | Present(${
+            this.state.data?.filter((el) => el.attendance === "present").length
+          })`}
           columns={COLUMNS(this.handleButtonClick, disabled)}
           data={searchText.length ? filteredData : data}
           pagination
@@ -344,15 +383,17 @@ class UmangRegListContainer extends Component {
                   Remarks: <b>{viewPopup.remarks}</b>
                 </li>
                 <li>
+                  Remarks: <b>{viewPopup.isBgIncluded}</b>
+                </li>
+                <li>
                   Registered on: <b>{viewPopup.registeredOn}</b>
                 </li>
               </ul>
             </div>
           </div>
         )}
-        
       </div>
-      );
+    );
   }
 }
 
