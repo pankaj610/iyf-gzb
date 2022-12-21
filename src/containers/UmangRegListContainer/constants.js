@@ -35,6 +35,11 @@ export const COLUMNS = (cb, disabled) => [
       sortable: true,
   },
   {
+    name: 'Bhagavad Gita',
+    selector: (devotee)=> {return devotee.isBgIncluded ? 'Yes': 'No'},
+    sortable: true,
+  },
+  {
     name: "Action",
     button: true,
     cell: (row) => (
