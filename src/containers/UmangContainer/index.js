@@ -80,7 +80,7 @@ const UmangContainer = () => {
               <div className="detail"> 15 August 2022</div>
             </div>
             <div className="poster">
-              <img src="https://res.cloudinary.com/xyzttt/image/upload/v1657433886/WhatsApp_Image_2022-07-01_at_11.24.21_AM_bcfm60.jpg" />
+              <img src="https://ik.imagekit.io/u9ydoo6zz/c6f94e50-81bd-400f-a7d8-9ea7fdfac30e.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1671714355123" />
             </div>
           </div>
         </div>
