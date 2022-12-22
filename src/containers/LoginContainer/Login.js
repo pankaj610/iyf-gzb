@@ -23,7 +23,7 @@ function LoginScreen() {
 
   const responseGoogle = (response) => {
     if (!response?.tokenId) {
-      alert("There is some error while logging in.");
+      alert(JSON.stringify(response)); 
       return;
     }
     setOrLoadUserData(response);
