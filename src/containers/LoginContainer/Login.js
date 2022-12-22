@@ -43,7 +43,8 @@ function LoginScreen() {
     const initClient = () => {
       gapi.client.init({
         clientId: clientId,
-        scope: "",
+        scope: 'profile email',
+        plugin_name:'iyf_login'
       });
     };
     gapi.load("client:auth2", initClient);
