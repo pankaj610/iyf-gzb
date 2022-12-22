@@ -181,8 +181,8 @@ const UmangVolunteerContainer = ()=> {
           </RoundBtn>
           <div className="note">
             Please select your correct name in <strong>Registered By</strong>{" "}
-            field. If you don't find your name, contact, Raghav Kripa Das at
-            9953522058.
+            field. If you don't find your name, contact, Krishnanand Sharma at
+            9808839806.
             <br /> ISKCON YOUTH FORUM GHAZIABAD holds the right to cancel the
             registration, if any discrepancies found.
           </div>
