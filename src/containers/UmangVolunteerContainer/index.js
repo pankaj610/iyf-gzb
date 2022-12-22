@@ -30,7 +30,7 @@ const UmangVolunteerContainer = ()=> {
   };
   
   const register = () => {
-    const { name, email, contact, location, gender,  paid, remarks } =
+    const { name, email, contact, location, gender,  paid, remarks,isBgIncluded } =
       state;
     // console.log(name, email, contact, gender, location, registeredBy, paid);
     if (name && email && contact && location && gender ) {
@@ -49,6 +49,7 @@ const UmangVolunteerContainer = ()=> {
         paid,
         registeredBy: registeredBy === "0" ? undefined : registeredBy,
         remarks,
+        isBgIncluded,
       })
         .then((res) => {
           if(res.data.message) {
@@ -181,8 +182,8 @@ const UmangVolunteerContainer = ()=> {
           </RoundBtn>
           <div className="note">
             Please select your correct name in <strong>Registered By</strong>{" "}
-            field. If you don't find your name, contact, Raghav Kripa Das at
-            9953522058.
+            field. If you don't find your name, contact, Krishnanand Sharma at
+            9808839806.
             <br /> ISKCON YOUTH FORUM GHAZIABAD holds the right to cancel the
             registration, if any discrepancies found.
           </div>
