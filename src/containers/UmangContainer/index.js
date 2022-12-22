@@ -22,10 +22,10 @@ const UmangContainer = () => {
             Your browser does not support HTML5 video.
           </video>
           <div className="banner-overlay">
-            <div className="title">UTSAH 2022</div>
-            <div className="line-1">FESTIVAL OF ETHUSIASM AND ECSTASY</div>
+            <div className="title">UTSAH 2023</div>
+            <div className="line-1">FESTIVAL OF ETHUSIASM AND JOY</div>
             <div className="line-2">
-              15 August 2022 / ISKCON GHAZIABAD / 3 PM ONWARDS
+              04 FEBRUARY 2023 / ISKCON GHAZIABAD / 2 PM ONWARDS
             </div>
             <a
               href="https://cutt.ly/registerNow"
@@ -64,7 +64,7 @@ const UmangContainer = () => {
             <div className="details">
               <div className="heading">THEME</div>
               <div className="detail">
-                Our Life in Two Wheels
+                Dharma Protects Those Who Protect It!
               </div>
               <div className="heading">WHERE</div>
               <div className="detail">
@@ -77,7 +77,7 @@ const UmangContainer = () => {
                 </a>
               </div>
               <div className="heading">WHEN</div>
-              <div className="detail"> 15 August 2022</div>
+              <div className="detail"> 04 FEBRUARY 2023</div>
             </div>
             <div className="poster">
               <img src="https://res.cloudinary.com/xyzttt/image/upload/v1657433886/WhatsApp_Image_2022-07-01_at_11.24.21_AM_bcfm60.jpg" />
@@ -96,11 +96,11 @@ const UmangContainer = () => {
             >
               <div className="detail">
                 <div className="heading">Enlightening Talk</div>
-                <div className="desc-1">HG Ram bhadra Das</div>
+                <div className="desc-1">HG Sundar Gopal Das</div>
                 {/* <div className="desc-2">
                   
                 </div> */}
-                <div className="desc-2">Temple President ISKCON Gurugram & Life Coach</div>
+                <div className="desc-2">Director ISKCON YOUTH FORUM</div>
               </div>
             </div>
             <div
@@ -113,7 +113,7 @@ const UmangContainer = () => {
               <div className="detail">
                 <div className="heading">Theatrical Performance</div>
                 <div className="desc-2">
-                  <b>Mera Bharat Mahaan</b>
+                  <b>Dharma Rakshati Rakshitha</b>
                 </div>
               </div>
             </div>
@@ -200,7 +200,7 @@ const UmangContainer = () => {
         <div className="fest-details">
           <div className="part">
             <div className="up-title">THEME</div>
-            <div className="title">Our Life on Two Wheels</div>
+            <div className="title">Dharma Protects Those Who Protect It!</div>
             <p className="para">
               Once titled Golden Bird, Vishwa Guru, India has now come way ahead
               only to realize that the paradise is lost. The countless glories
