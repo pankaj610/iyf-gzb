@@ -64,7 +64,7 @@ class UmangRegListContainer extends Component {
       .map((e) => e.name)
       .slice(0, -1);
     const keys = COLUMNS(() => {}, false)
-      .map((e) => e.selector)
+      .map((e) => typeof e.selector === 'string' ? e.selector : 'isBgIncluded')
       .slice(0, -1);
 
     result = "";
@@ -74,8 +74,7 @@ class UmangRegListContainer extends Component {
     array.forEach((item) => {
       let ctr = 0;
       keys.forEach((key) => {
-        if (ctr > 0) result += columnDelimiter;
-
+        if (ctr > 0) result += columnDelimiter; 
         result += item[key].toString().replace(",", ".");
 
         ctr++;
@@ -203,8 +202,7 @@ class UmangRegListContainer extends Component {
     const { data, searchText, filteredData, editPopup, viewPopup, disabled } =
       this.state;
     const isMobile = window.screen.width <= 600;
-    const width = isMobile ? window.screen.width - 20 : window.screen.width / 4;
-    console.log(width);
+    const width = isMobile ? window.screen.width - 20 : window.screen.width / 4; 
     return (
       <div className="reg-list-container">
         <div

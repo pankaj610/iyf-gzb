@@ -30,13 +30,15 @@ export const COLUMNS = (cb, disabled) => [
     sortable: true,
   },
   {
-      name: 'Remarks',
-      selector: 'remarks',
-      sortable: true,
+    name: "Remarks",
+    selector: "remarks",
+    sortable: true,
   },
   {
-    name: 'Bhagavad Gita',
-    selector: (devotee)=> {return devotee.isBgIncluded ? 'Yes': 'No'},
+    name: "Bhagavad Gita",
+    selector: (devotee) => {
+      return devotee.isBgIncluded ? "Yes" : "No";
+    },
     sortable: true,
   },
   {
@@ -71,7 +73,11 @@ export const COLUMNS = (cb, disabled) => [
         <button
           style={{
             color: "white",
-            background: disabled ? "#666" : row.attendance === "absent" ? "#500" : "#050",
+            background: disabled
+              ? "#666"
+              : row.attendance === "absent"
+              ? "#500"
+              : "#050",
             border: "1px solid black",
             margin: "2px",
             borderRadius: "4px",
