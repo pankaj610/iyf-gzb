@@ -37,8 +37,7 @@ const UmangVolunteerContainer = ()=> {
       //   console.log(name, email, contact, gender, location, registeredBy, paid);
       setState({
         disableBtn: true
-      });
-      console.log(userData);
+      }); 
       const registeredBy =  `${userData?.profileObj?.name}` ;
       createNewRegistration({
         name,
