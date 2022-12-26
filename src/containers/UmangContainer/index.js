@@ -28,7 +28,7 @@ const UmangContainer = () => {
               04 FEBRUARY 2023 / ISKCON GHAZIABAD / 2 PM ONWARDS
             </div>
             <a
-              href="https://cutt.ly/registerNow"
+              href="https://pages.razorpay.com/pl_Kq9dZCYiK4jPV4/view"
               target="_blank"
               rel="noreferrer"
             >
@@ -234,7 +234,7 @@ const UmangContainer = () => {
               <li>Dinner Buffet</li>
             </ul>
             <a
-              href="https://cutt.ly/registerNow"
+              href="https://pages.razorpay.com/pl_Kq9dZCYiK4jPV4/view"
               target="_blank"
               rel="noreferrer"
               className="purchase"
