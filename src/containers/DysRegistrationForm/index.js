@@ -32,7 +32,7 @@ const DysRegistrationForm = () => {
 
   const registerForDys =()=> { 
     const {name, email , contact, dob, area, occupation,registeredBy, remarks}= formValues;
-    if( name && email && contact && dob && area && occupation && registeredBy && remarks){
+    if( name && email && contact && area && occupation && registeredBy && remarks){
       createNewDysRegistration({name , email, contact,dob, area, occupation, registeredBy, remarks}).then((response)=>{
         resetForm();
         const data=response.data; 
