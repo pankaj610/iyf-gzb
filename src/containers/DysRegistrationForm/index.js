@@ -66,7 +66,7 @@ const DysRegistrationForm = () => {
         name,
         email,
         contact,
-        dob,
+        dob: dob ? dob : undefined,
         area,
         occupation,
         registeredBy,
