@@ -2,50 +2,90 @@ import React, { useState } from "react";
 import { createNewDysRegistration } from "../../services/UmangService";
 import Input from "../../ui/Input";
 export const transformName = (name) => {
-  if(name === "") {
+  if (name === "") {
     return "Select";
   }
-  return name.split("_").join(" ").toUpperCase()
-}
+  return name.split("_").join(" ").toUpperCase();
+};
 
 const DysRegistrationForm = () => {
-  const initialValues = {name: "", email: "", contact: "", dob: "", area:"", occupation: "", registeredBy:"", remarks: ""};
+  const initialValues = {
+    name: "",
+    email: "",
+    contact: "",
+    dob: "",
+    area: "",
+    occupation: "",
+    registeredBy: "",
+    remarks: "",
+  };
+
   const volunteers = [
-    "", 
-    "Kanu Mohan Das", 
-    "Pankaj Verma",  
-    "Shubham Tiwari Das", 
-    
-];
-  const [formValues, setFormValues]=useState(initialValues);
- 
-
-  const handleChange = (e) => { 
-    const {name, value } = e.target;
-    setFormValues({...formValues,[name]:value})
-  }
-
-  const resetForm = ()=> {
-    setFormValues({...initialValues, registeredBy: '0'});
-  }
-
-
-  const registerForDys =()=> { 
-    const {name, email , contact, dob, area, occupation,registeredBy, remarks}= formValues;
-    if( name && email && contact && area && occupation && registeredBy && remarks){
-      createNewDysRegistration({name , email, contact,dob, area, occupation, registeredBy, remarks}).then((response)=>{
-        resetForm();
-        const data=response.data; 
-        if(data?.message) {
-          alert(data.message);
-        } else { 
-          alert("DYS is registered successfully. Ticket Id: "+ data.ticket?.ticket_id);
-        }
-      })
-    }
-  }
-
+    "",
+    "Kanu Mohan Das",
+    "Pankaj Verma",
+    "Shubham Tiwari Das",
+    "Mohit Rajput",
+    "Ankur Sharma",
+    "Krishnanand Pr",
+    "Raghav Kripa Das",
+  ];
   
+  const [formValues, setFormValues] = useState(initialValues);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const resetForm = () => {
+    setFormValues({ ...initialValues, registeredBy: "0" });
+  };
+
+  const registerForDys = () => {
+    const {
+      name,
+      email,
+      contact,
+      dob,
+      area,
+      occupation,
+      registeredBy,
+      remarks,
+    } = formValues;
+    if (
+      name &&
+      email &&
+      contact &&
+      area &&
+      occupation &&
+      registeredBy &&
+      remarks
+    ) {
+      createNewDysRegistration({
+        name,
+        email,
+        contact,
+        dob,
+        area,
+        occupation,
+        registeredBy,
+        remarks,
+      }).then((response) => {
+        resetForm();
+        const data = response.data;
+        if (data?.message) {
+          alert(data.message);
+        } else {
+          alert(
+            "DYS is registered successfully. Ticket Id: " +
+              data.ticket?.ticket_id
+          );
+        }
+      });
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -100,7 +140,7 @@ const DysRegistrationForm = () => {
             onChange={handleChange}
             name="dob"
           />
-          </div>
+        </div>
         {/* <div className="input-group mb-3">
           <select className="form-select" id="inputGroupSelect01">
             <option selected>Select Gender</option>
@@ -180,7 +220,9 @@ const DysRegistrationForm = () => {
         <div className="input-group mb-3">
           <Input
             placeholder={"Registered by"}
-            setValue={(name, value)=> handleChange({target:{name, value}})}
+            setValue={(name, value) =>
+              handleChange({ target: { name, value } })
+            }
             value={formValues.registeredBy}
             name="registeredBy"
             type="select"
@@ -188,12 +230,12 @@ const DysRegistrationForm = () => {
               label: transformName(v),
               value: v,
             }))}
-            className="full input w-100" 
+            className="full input w-100"
           />
         </div>
         <div className="input-group mb-3">
           <input
-            type="text" 
+            type="text"
             className="form-control"
             value={formValues.remarks}
             aria-label="Sizing example input"
@@ -227,8 +269,6 @@ const DysRegistrationForm = () => {
             onClick={registerForDys}
           ></input>
         </div>
-
-   
       </div>
     </>
   );
