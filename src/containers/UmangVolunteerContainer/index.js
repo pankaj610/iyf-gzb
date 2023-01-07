@@ -31,10 +31,8 @@ const UmangVolunteerContainer = ()=> {
   
   const register = () => {
     const { name, email, contact, location, gender,  paid, remarks,isBgIncluded } =
-      state;
-    // console.log(name, email, contact, gender, location, registeredBy, paid);
-    if (name && email && contact && location && gender ) {
-      //   console.log(name, email, contact, gender, location, registeredBy, paid);
+      state; 
+    if (name && email && contact && location && gender ) { 
       setState({
         disableBtn: true
       }); 
