@@ -58,8 +58,7 @@ export const whatCanISeeAtom = atom([]);
 function App() {
   const [, setUserData] = useAtom(setUserDataAtom); 
   const [iCanSee] = useAtom(whatCanISeeAtom);
-
-  console.log(iCanSee);
+ 
 
   useEffect(() => {
     loadUserData(); 

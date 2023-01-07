@@ -38,7 +38,6 @@ class Input extends React.Component {
         if (required && !value) {
             return true;
         } else if (test) {
-            console.log(test, test.test(value), value)
             return !test.test(value);
         }
         return false;

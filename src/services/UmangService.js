@@ -54,8 +54,7 @@ export const fetchVolunteerList = () => {
   });
 };
 
-export const fetchDysRegistrations = () => {
-  console.log({GOOGLE_TOKEN: getToken()});
+export const fetchDysRegistrations = () => { 
   return axios.get(BASE_URL + "/dysList", {
     headers: {
       Authorization: `Bearer ${getToken()}`

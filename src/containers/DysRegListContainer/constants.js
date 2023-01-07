@@ -11,10 +11,13 @@ export const DYS_COLUMNS = (cb, disabled, session_id) => [
     name: "Email",
     selector: (row) => row.devoteeInfo?.[0]?.email,
   },
-
+  {
+    name: "Dob",
+    selector: (row) => row.devoteeInfo?.[0]?.dob && new Date(row.devoteeInfo?.[0]?.dob).toDateString(),
+  },
   {
     name: "Contact",
-    selector: (row) => row.devoteeInfo?.[0]?.contact,
+    selector: (row) => <a href={`tel:${row.devoteeInfo?.[0]?.contact}`}>{row.devoteeInfo?.[0]?.contact}</a>,
   },
   {
     name: "Ticket Id",
@@ -24,6 +27,10 @@ export const DYS_COLUMNS = (cb, disabled, session_id) => [
   {
     name: "Batch",
     selector: (row) => row.dys_batch?.replace("_", " ")?.toLocaleUpperCase(),
+  },
+  {
+    name: "Facilitator",
+    selector: (row) => row.devoteeInfo?.[0]?.facilitator,
   },
   {
     name: "Attendance",

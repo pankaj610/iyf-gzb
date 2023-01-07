@@ -131,7 +131,7 @@ function DysRegListContainer() {
   const sendUpdateRequest = () => {
     const { devoteeInfo } = editPopup;
     const { _id, email, contact, frontliner,
-      facilitator } = devoteeInfo?.[0] || {};
+      facilitator, dob } = devoteeInfo?.[0] || {};
 
     updateRegistration({
       _id,
@@ -139,6 +139,7 @@ function DysRegListContainer() {
       contact,
       frontliner,
       facilitator,
+      dob,
     })
       .then((response) => {
         const updatedData = dysRegistrations.map((participant) => {
@@ -422,6 +423,26 @@ function DysRegListContainer() {
                   value={editPopup?.devoteeInfo?.[0]?.contact}
                   onChange={(e) => {
                     editPopup.devoteeInfo[0].contact = e.target.value;
+                    setState({
+                      editPopup: {
+                        ...editPopup,
+                        devoteeInfo: [editPopup?.devoteeInfo?.[0]],
+                      },
+                    });
+                  }}
+                />
+              </li>
+              <li>
+                <FormLabel>Date of Birth</FormLabel>
+                <Input
+                  type="date"
+                  className="full input w-100"
+                  autoComplete="off"
+                  name="dob"
+                  value={editPopup?.devoteeInfo?.[0]?.dob}
+                  setValue={(key, value) => {
+                    console.log({dob: value});
+                    editPopup.devoteeInfo[0].dob = value;
                     setState({
                       editPopup: {
                         ...editPopup,
