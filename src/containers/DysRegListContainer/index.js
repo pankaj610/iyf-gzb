@@ -2,6 +2,7 @@ import "./styles.scss";
 import React, { useMemo, useRef } from "react";
 import { useState, useEffect } from "react";
 import {
+  fetchAllFacilitators,
   fetchDysRegistrations,
   markDysAttendance,
   updateRegistration,
@@ -16,15 +17,19 @@ import {
   Col,
   Image,
   Card,
+  FormLabel,
+  Dropdown,
 } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router";
 import { Table, Tbody, Td, Th, Thead, Tr } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import { QrReader } from "react-qr-reader";
+import Input from "../../ui/Input";
 
 function DysRegListContainer() {
   const [dysRegistrations, setDysRegistrations] = useState([]);
   const [searchText, setSearchInput] = useState("");
+  const [facilitatorList, setFacilitatorsList] = useState([]);
 
   const params = useParams();
   const { session_id } = params || {};
@@ -80,6 +85,13 @@ function DysRegListContainer() {
     }
   }, [session_id]);
 
+  useEffect(()=> {
+    fetchAllFacilitators().then((response)=> {
+      setFacilitatorsList(response.data?.data?.data?.map(el=> el.name));
+    })
+  }, []);
+ 
+
   const fetchDysRegList = async () => {
     fetchDysRegistrations()
       .then((response) => {
@@ -91,8 +103,7 @@ function DysRegListContainer() {
       });
   };
 
-  const handleRowActions = (type, row) => {
-    console.log(JSON.stringify(row, null, 2));
+  const handleRowActions = (type, row) => { 
     switch (type) {
       case "mark_attendance":
         markDysAttendance(
@@ -119,20 +130,20 @@ function DysRegListContainer() {
 
   const sendUpdateRequest = () => {
     const { devoteeInfo } = editPopup;
-    const { _id, email, contact } = devoteeInfo?.[0] || {};
+    const { _id, email, contact, frontliner,
+      facilitator } = devoteeInfo?.[0] || {};
+
     updateRegistration({
       _id,
       email,
       contact,
+      frontliner,
+      facilitator,
     })
-      .then(() => {
+      .then((response) => {
         const updatedData = dysRegistrations.map((participant) => {
           if (participant._id === _id) {
-            return {
-              ...participant,
-              email: email,
-              contact: contact,
-            };
+            return response?.data;
           }
           return participant;
         });
@@ -155,7 +166,7 @@ function DysRegListContainer() {
     setSearchInput(value);
   };
 
-  const CameraComponent = useMemo(() => { 
+  const CameraComponent = useMemo(() => {
     return (
       <QrReader
         ref={qrRef}
@@ -173,8 +184,7 @@ function DysRegListContainer() {
               const devotee = dysRegistrations.find(
                 (el) => el.ticket_id === parsedTicketData?.ticketId
               );
-              if (devotee) {
-                console.log(devotee);
+              if (devotee) { 
                 setState((prev) => ({ ...prev, completed: devotee }));
                 setTimeout(() => {
                   setState((prev) => ({ ...prev, completed: null }));
@@ -196,8 +206,7 @@ function DysRegListContainer() {
       />
     );
   }, [dysRegistrations, facingMode, scanner, session_id]);
-
-  console.log({ session_id });
+ 
   if (!session_id)
     return (
       <Container
@@ -206,67 +215,67 @@ function DysRegListContainer() {
         fluid
       >
         <h1 className="text-center">Please select DYS session</h1>
-        <Row className="justify-content-center px-3 mx-3"> 
-            <Button
-              variant="outline-success"
-              className="m-3"
-              size="lg"
-              onClick={() => {
-                navigate(`/dys/list/session_1`);
-              }}
-            >
-              Session 1
-            </Button>
-            <Button
-              variant="outline-success"
-              className="m-3"
-              size="lg"
-              onClick={() => {
-                navigate(`/dys/list/session_2`);
-              }}
-            >
-              Session 2
-            </Button>
-            <Button
-              variant="outline-success"
-              className="m-3"
-              size="lg"
-              onClick={() => {
-                navigate(`/dys/list/session_3`);
-              }}
-            >
-              Session 3
-            </Button>
-            <Button
-              variant="outline-success"
-              className="m-3"
-              size="lg"
-              onClick={() => {
-                navigate(`/dys/list/session_4`);
-              }}
-            >
-              Session 4
-            </Button>
-            <Button
-              variant="outline-success"
-              className="m-3"
-              size="lg"
-              onClick={() => {
-                navigate(`/dys/list/session_5`);
-              }}
-            >
-              Session 5
-            </Button>
-            <Button
-              variant="outline-success"
-              className="m-3"
-              size="lg"
-              onClick={() => {
-                navigate(`/dys/list/session_6`);
-              }}
-            >
-              Session 6
-            </Button> 
+        <Row className="justify-content-center px-3 mx-3">
+          <Button
+            variant="outline-success"
+            className="m-3"
+            size="lg"
+            onClick={() => {
+              navigate(`/dys/list/session_1`);
+            }}
+          >
+            Session 1
+          </Button>
+          <Button
+            variant="outline-success"
+            className="m-3"
+            size="lg"
+            onClick={() => {
+              navigate(`/dys/list/session_2`);
+            }}
+          >
+            Session 2
+          </Button>
+          <Button
+            variant="outline-success"
+            className="m-3"
+            size="lg"
+            onClick={() => {
+              navigate(`/dys/list/session_3`);
+            }}
+          >
+            Session 3
+          </Button>
+          <Button
+            variant="outline-success"
+            className="m-3"
+            size="lg"
+            onClick={() => {
+              navigate(`/dys/list/session_4`);
+            }}
+          >
+            Session 4
+          </Button>
+          <Button
+            variant="outline-success"
+            className="m-3"
+            size="lg"
+            onClick={() => {
+              navigate(`/dys/list/session_5`);
+            }}
+          >
+            Session 5
+          </Button>
+          <Button
+            variant="outline-success"
+            className="m-3"
+            size="lg"
+            onClick={() => {
+              navigate(`/dys/list/session_6`);
+            }}
+          >
+            Session 6
+          </Button>
         </Row>
         <Button
           variant="info"
@@ -385,49 +394,91 @@ function DysRegListContainer() {
               e.stopPropagation();
             }}
           >
-            <ul className="edit-sheet">
+            <ul className="m-0 p-0">
               <li>
-                Email
-                <br />
-                <b>
-                  <input
-                    autoComplete="off"
-                    value={editPopup?.devoteeInfo?.[0]?.email}
-                    onChange={(e) => {
-                      if (editPopup.devoteeInfo?.[0]) {
-                        editPopup.devoteeInfo[0].email = e.target.value;
-                        setState({
-                          editPopup: {
-                            ...editPopup,
-                            devoteeInfo: [editPopup?.devoteeInfo?.[0]],
-                          },
-                        });
-                      }
-                    }}
-                  />
-                </b>
-              </li>
-              <li>
-                Contact
-                <br />
-                <b>
-                  <input
-                    autoComplete="off"
-                    value={editPopup?.devoteeInfo?.[0]?.contact}
-                    onChange={(e) => {
-                      editPopup.devoteeInfo[0].contact = e.target.value;
+                <FormLabel>Email</FormLabel>
+                <Input
+                  className="full input w-100"
+                  autoComplete="off"
+                  value={editPopup?.devoteeInfo?.[0]?.email}
+                  onChange={(e) => {
+                    if (editPopup.devoteeInfo?.[0]) {
+                      editPopup.devoteeInfo[0].email = e.target.value;
                       setState({
                         editPopup: {
                           ...editPopup,
                           devoteeInfo: [editPopup?.devoteeInfo?.[0]],
                         },
                       });
-                    }}
-                  />
-                </b>
+                    }
+                  }}
+                />
               </li>
+              <li>
+                <FormLabel>Contact</FormLabel>
+                <Input
+                  className="full input w-100"
+                  autoComplete="off"
+                  value={editPopup?.devoteeInfo?.[0]?.contact}
+                  onChange={(e) => {
+                    editPopup.devoteeInfo[0].contact = e.target.value;
+                    setState({
+                      editPopup: {
+                        ...editPopup,
+                        devoteeInfo: [editPopup?.devoteeInfo?.[0]],
+                      },
+                    });
+                  }}
+                />
+              </li>
+              <li>
+                <FormLabel>Facilitator</FormLabel>
+                <Dropdown onSelect={(value)=> {
+                  editPopup.devoteeInfo[0].facilitator = value;
+                  setState({
+                    editPopup: {
+                      ...editPopup,
+                      devoteeInfo: [editPopup?.devoteeInfo?.[0]],
+                    },
+                  });
+                }} >
+                  <Dropdown.Toggle variant="info"  id="dropdown-basic">
+                    { editPopup?.devoteeInfo?.[0]?.facilitator || 'Facilitator'}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {facilitatorList.map(facilitator => <Dropdown.Item eventKey={facilitator} >{facilitator}</Dropdown.Item>)}
+                  </Dropdown.Menu>
+                </Dropdown> 
+              </li>
+              <li>
+                <FormLabel>Frontliner</FormLabel>
+                <Dropdown onSelect={(value)=> {
+                  editPopup.devoteeInfo[0].frontliner = value;
+                  setState({
+                    editPopup: {
+                      ...editPopup,
+                      devoteeInfo: [editPopup?.devoteeInfo?.[0]],
+                    },
+                  });
+                }} >
+                  <Dropdown.Toggle variant="info"  id="dropdown-basic">
+                    { editPopup?.devoteeInfo?.[0]?.frontliner || 'Frontliner'}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {facilitatorList.map(facilitator => <Dropdown.Item eventKey={facilitator} >{facilitator}</Dropdown.Item>)}
+                  </Dropdown.Menu>
+                </Dropdown> 
+              </li>
+             
             </ul>
-            <button onClick={sendUpdateRequest}>UPDATE</button>
+            <button
+              onClick={sendUpdateRequest}
+              className="btn btn-success mt-2"
+            >
+              UPDATE
+            </button>
           </div>
         </div>
       )}
@@ -457,6 +508,12 @@ function DysRegListContainer() {
               </li>
               <li>
                 Registered by: <b>{viewPopup.registeredBy}</b>
+              </li>
+              <li>
+                Facilitator: <b>{viewPopup?.devoteeInfo?.[0]?.facilitator}</b>
+              </li>
+              <li>
+                Frontliner: <b>{viewPopup?.devoteeInfo?.[0]?.frontliner}</b>
               </li>
               <li>
                 Remarks: <b>{viewPopup.remarks}</b>
@@ -508,9 +565,12 @@ function DysRegListContainer() {
                 <Button
                   variant="success"
                   onClick={() => {
-                    const previous = facingMode;
-                    console.log(previous);
-                    setState((prev) => ({ ...prev, scanner: null ,facingMode: null }));
+                    const previous = facingMode; 
+                    setState((prev) => ({
+                      ...prev,
+                      scanner: null,
+                      facingMode: null,
+                    }));
                     setTimeout(() => {
                       setState((prev) => ({
                         ...prev,

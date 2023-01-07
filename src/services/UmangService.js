@@ -38,8 +38,8 @@ export const createNewDysRegistration=(userDetails) => {
   });
 };
 
-export const updateRegistration = ({_id, email, contact}) => {
-  return axios.put(BASE_URL + `/update/${_id}`, {email, contact}, {
+export const updateRegistration = ({_id,...devoteeData}) => {
+  return axios.put(BASE_URL + `/update/${_id}`, devoteeData, {
     headers: {
       Authorization: `Bearer ${getToken()}`
     }
@@ -104,3 +104,6 @@ export const whatCanISee = () => {
   });
 };
 
+export const fetchAllFacilitators = () => {
+  return axios.get('https://admin-api.coastok.com/api/v1/search?userRole=3&areaId=6009b2c0c13fbd475ac3c92a&per_page=100');
+} 
