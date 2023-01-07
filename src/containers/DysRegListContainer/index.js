@@ -439,7 +439,7 @@ function DysRegListContainer() {
                   className="full input w-100"
                   autoComplete="off"
                   name="dob"
-                  value={editPopup?.devoteeInfo?.[0]?.dob}
+                  value={editPopup?.devoteeInfo?.[0]?.dob?.split("T")?.[0]}
                   setValue={(key, value) => {
                     console.log({dob: value});
                     editPopup.devoteeInfo[0].dob = value;
