@@ -109,7 +109,16 @@ const UmangVolunteerContainer = () => {
   } = state;
   return (
     <>
-      {loader && <ReactLoading type="spin" height="25px" width="25px" />}
+      {loader && (
+        <div className="loader-container">
+          <ReactLoading
+            type="spinningBubbles"
+            color="white"
+            height="70px"
+            width="70px"
+          />
+        </div>
+      )}
       <div className="umang-container">
         <h1>UTSAH REGISTRATION</h1>
         <div className="form">
