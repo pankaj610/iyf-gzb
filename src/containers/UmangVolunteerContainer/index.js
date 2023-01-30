@@ -1,42 +1,54 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import Input from "../../ui/Input";
 import RoundBtn from "../../ui/RoundBtn";
 import { createNewRegistration } from "../../services/UmangService";
 import COLORS from "../../constants/colors";
-import "./style.scss"; 
+import "./style.scss";
 import { useAtom } from "jotai";
 import { userDataAtom } from "../../App";
+import ReactLoading from "react-loading";
 
-
-const UmangVolunteerContainer = ()=> {
-   const [state, setState] = useReducer((prevState, nextState)=> ({...prevState, ...nextState}), {
-    name: "",
-    email: "",
-    contact: "",
-    gender: "",
-    location: "",
-    remarks: "",
-    paid: true,
-    registeredBy: "0",
-    isBgIncluded: false,
-  });
+const UmangVolunteerContainer = () => {
+  const [state, setState] = useReducer(
+    (prevState, nextState) => ({ ...prevState, ...nextState }),
+    {
+      name: "",
+      email: "",
+      contact: "",
+      gender: "",
+      location: "",
+      remarks: "",
+      paid: true,
+      registeredBy: "0",
+      isBgIncluded: false,
+    }
+  );
 
   const [userData] = useAtom(userDataAtom);
-
+  const [loader, setLoader] = useState(false);
   const setFormData = (name, value) => {
     setState({
       [name]: value,
     });
   };
-  
+
   const register = () => {
-    const { name, email, contact, location, gender,  paid, remarks,isBgIncluded } =
-      state; 
-    if (name && email && contact && location && gender ) { 
+    setLoader(true);
+    const {
+      name,
+      email,
+      contact,
+      location,
+      gender,
+      paid,
+      remarks,
+      isBgIncluded,
+    } = state;
+    if (name && email && contact && location && gender) {
       setState({
-        disableBtn: true
-      }); 
-      const registeredBy =  `${userData?.profileObj?.name}` ;
+        disableBtn: true,
+      });
+      const registeredBy = `${userData?.profileObj?.name}`;
       createNewRegistration({
         name,
         email,
@@ -49,7 +61,8 @@ const UmangVolunteerContainer = ()=> {
         isBgIncluded,
       })
         .then((res) => {
-          if(res.data.message) {
+          setLoader(false);
+          if (res.data.message) {
             alert(res.data.message);
             return;
           }
@@ -67,33 +80,45 @@ const UmangVolunteerContainer = ()=> {
             `Registration successfully done. Ticket ID is ${res.data?.ticket?.ticket_id}.`
           );
           setState({
-            disableBtn: false
+            disableBtn: false,
           });
         })
         .catch((e) => {
+          setLoader(false);
           alert("Error:", JSON.stringify(e));
         });
-        setState({
-          disableBtn: false
-        });
+      setState({
+        disableBtn: false,
+      });
     } else {
       alert("Please fill details");
     }
   };
- 
-    const {
-      name,
-      email,
-      contact,
-      location,
-      isBgIncluded,
-      // registeredBy,
-      // volunteers,
-      gender,
-      remarks,
-      disableBtn,
-    } = state;
-    return (
+
+  const {
+    name,
+    email,
+    contact,
+    location,
+    isBgIncluded,
+    // registeredBy,
+    // volunteers,
+    gender,
+    remarks,
+    disableBtn,
+  } = state;
+  return (
+    <>
+      {loader && (
+        <div className="loader-container">
+          <ReactLoading
+            type="spinningBubbles"
+            color="white"
+            height="70px"
+            width="70px"
+          />
+        </div>
+      )}
       <div className="umang-container">
         <h1>UTSAH REGISTRATION</h1>
         <div className="form">
@@ -186,8 +211,8 @@ const UmangVolunteerContainer = ()=> {
           </div>
         </div>
       </div>
-    );
-  
-}
+    </>
+  );
+};
 
 export default UmangVolunteerContainer;

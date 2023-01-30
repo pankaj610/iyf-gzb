@@ -1,35 +1,48 @@
 @import "../../styles/constants.scss";
 @import "../../styles/mixins.scss";
 
+.loader-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background: #504135;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .umang-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+    font-size: 46px;
+    margin: 10px;
+    font-weight: bold;
+  }
+  div.form {
+    width: 50%;
     display: flex;
-    align-items: center;
     flex-direction: column;
-    h1 {
-        font-size: 46px;
-        margin: 10px;
-        font-weight: bold;
+    padding: 10px;
+    margin: auto;
+    @include for-tablet {
+      width: 70%;
     }
-    div.form {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        padding: 10px;
-        margin: auto;
-        @include for-tablet {
-            width: 70%;
-        }
-        @include for-phone {
-            width: 100%;
-        }
-        .input-container {
-            display: block;
-            width: 100%;
-            margin: 6px;
-        }
-        .note {
-            margin: 20px 0;
-            line-height: 140%;
-        }
+    @include for-phone {
+      width: 100%;
     }
+    .input-container {
+      display: block;
+      width: 100%;
+      margin: 6px;
+    }
+    .note {
+      margin: 20px 0;
+      line-height: 140%;
+    }
+  }
 }
