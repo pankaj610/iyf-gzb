@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createNewDysRegistration } from "../../services/UmangService";
+import ReactLoading from "react-loading";
 import Input from "../../ui/Input";
 export const transformName = (name) => {
   if (name === "") {
@@ -19,7 +20,6 @@ const DysRegistrationForm = () => {
     registeredBy: "",
     remarks: "",
   };
-
   const volunteers = [
     "",
     "Kanu Mohan Das",
@@ -30,9 +30,9 @@ const DysRegistrationForm = () => {
     "Krishnanand Pr",
     "Raghav Kripa Das",
   ];
-  
-  const [formValues, setFormValues] = useState(initialValues);
 
+  const [formValues, setFormValues] = useState(initialValues);
+  const [loader, setLoader] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -43,6 +43,7 @@ const DysRegistrationForm = () => {
   };
 
   const registerForDys = () => {
+    setLoader(true);
     const {
       name,
       email,
@@ -75,8 +76,10 @@ const DysRegistrationForm = () => {
         resetForm();
         const data = response.data;
         if (data?.message) {
+          setLoader(false);
           alert(data.message);
         } else {
+          setLoader(false);
           alert(
             "DYS is registered successfully. Ticket Id: " +
               data.ticket?.ticket_id
@@ -88,6 +91,7 @@ const DysRegistrationForm = () => {
 
   return (
     <>
+      {loader && <ReactLoading type="spin" height="25px" width="25px" />}
       <div className="container">
         {/* <div className="text-bg-dark p-3">Dark with contrasting color</div> */}
         <div className="umang-container">
